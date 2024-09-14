@@ -23,14 +23,14 @@ class DownloadManager(
 
     suspend fun downloadVendetta(out: File, onProgressUpdate: (Float?) -> Unit) =
         download(
-            "https://github.com/pyoncord/BunnyXposed/releases/latest/download/app-release.apk",
+            "https://github.com/revenge-mod/RevengeXposed/releases/latest/download/app-release.apk",
             out,
             onProgressUpdate
         )
 
     suspend fun downloadUpdate(out: File) =
         download(
-            "https://github.com/pyoncord/BunnyManager/releases/latest/download/Manager.apk",
+            "https://github.com/revenge-mod/RevengeManager/releases/latest/download/Manager.apk",
             out
         ) {
             /* TODO: Update a progress bar in the update dialog */
