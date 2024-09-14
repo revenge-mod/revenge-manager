@@ -17,7 +17,7 @@ class DownloadVendettaStep(
 
     override val nameRes = R.string.step_dl_vd
 
-    override val url: String = "https://github.com/revenge/RevengeXposed/releases/latest/download/app-release.apk"
+    override val url: String = "https://github.com/revenge-mod/RevengeXposed/releases/latest/download/app-release.apk"
     override val destination = preferenceManager.moduleLocation
     override val workingCopy = workingDir.resolve("xposed.apk")
 
