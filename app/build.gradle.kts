@@ -13,11 +13,11 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "io.github.pyoncord.manager"
+        applicationId = "app.revenge.manager"
         minSdk = 28
         targetSdk = 34
-        versionCode = 1006
-        versionName = "1.0.6"
+        versionCode = 1000
+        versionName = "1.0.0"
 
         buildConfigField("String", "GIT_BRANCH", "\"${getCurrentBranch()}\"")
         buildConfigField("String", "GIT_COMMIT", "\"${getLatestCommit()}\"")
