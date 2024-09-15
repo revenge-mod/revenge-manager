@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.serialization)
+    publishing
 }
 
 android {
@@ -31,7 +32,7 @@ android {
     }
 
     buildTypes {
-        named("release") {
+        release {
             isCrunchPngs = true
             isMinifyEnabled = true
             isShrinkResources = true
@@ -39,6 +40,20 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
             )
+
+            val keystoreFile = file("keystore.jks")
+            if (keystoreFile.exists()) {
+                signingConfig = signingConfigs.create("release") {
+                    storeFile = keystoreFile
+                    storePassword = System.getenv("KEYSTORE_PASSWORD")
+                    keyAlias = System.getenv("KEYSTORE_ENTRY_ALIAS")
+                    keyPassword = System.getenv("KEYSTORE_ENTRY_PASSWORD")
+                }
+            }
+        }
+
+        debug {
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
 
@@ -63,6 +78,14 @@ android {
 
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.6"
+    }
+
+    applicationVariants.all {
+        outputs.all {
+            this as com.android.build.gradle.internal.api.ApkVariantOutputImpl
+
+            outputFileName = "${rootProject.name}-$version.apk"
+        }
     }
 
     androidComponents {
@@ -147,7 +170,7 @@ fun exec(vararg command: String): String? {
             isIgnoreExitValue = true
         }
 
-        if(errout.size() > 0)
+        if (errout.size() > 0)
             throw Error(errout.toString(Charsets.UTF_8))
 
         stdout.toString(Charsets.UTF_8).trim()
@@ -156,3 +179,10 @@ fun exec(vararg command: String): String? {
         null
     }
 }
+
+// Used by gradle-semantic-release-plugin.
+// Tracking: https://github.com/KengoTODA/gradle-semantic-release-plugin/issues/435.
+tasks.publish {
+    dependsOn("assembleRelease")
+}
+

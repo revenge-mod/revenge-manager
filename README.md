@@ -1,64 +1,46 @@
-<div align="center">
 
-  <img src="images/bunny_logo.png" alt="Bunny logo" width="200px" style="border-radius: 50%" />
-  
-  # Bunny Manager
+# 💊 Revenge Manager
 
-  Easily install Bunny on Android
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/revenge-mod/revenvemanager/release.yml)
+![GPLv3 License](https://img.shields.io/badge/License-OSL%20v3-yellow.svg)
 
-  [![Latest release](https://img.shields.io/github/v/release/pyoncord/BunnyManager?color=3AB8BA&display_name=release&label=Latest&style=for-the-badge)](https://github.com/pyoncord/BunnyManager/releases/latest)
-  
-  ---
+Application to use Revenge on Android.
 
-  <br>
+## ❓ About
 
-  ![Debug build status](https://img.shields.io/github/actions/workflow/status/pyoncord/BunnyManager/build-debug.yml?label=Debug%20Build&logo=github&style=for-the-badge&branch=main)
-  [![Stars](https://img.shields.io/github/stars/pyoncord/BunnyManager?logo=github&style=for-the-badge)](https://github.com/pyoncord/BunnyManager/stargazers)
-  [![Discord](https://img.shields.io/discord/1196075698301968455?logo=discord&logoColor=white&style=for-the-badge)](https://discord.gg/XjYgWXHb9Q)
-  
-  <br>
-  
-  ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/pyoncord/BunnyManager?logo=github&logoColor=%23fff&style=for-the-badge)
-  ![Downloads (latest)](https://img.shields.io/github/downloads/pyoncord/BunnyManager/latest/total?style=for-the-badge&logo=github&label=Downloads%20(Latest)&color=blue)
-  ![Total downloads](https://img.shields.io/github/downloads/pyoncord/BunnyManager/total?style=for-the-badge&logo=github&label=Downloads%20(Total)&color=blue)
-  ![GitHub top language](https://img.shields.io/github/languages/top/pyoncord/BunnyManager?style=for-the-badge)
+Revenge Manager is an application that installs and updates [Revenge](https://github.com/revenge-mod/revenge),
+a modification for Discord.
 
-  <br>
+## 💪 Features
 
-  <img src="images/screenshot_home.jpg" width="200px">
-  
-</div>
+Some of the features Revenge Manager provides are:
 
-Build
----
+- 📲 **Install**: Download Discord and install Revenge on it
+- 🔁 **Update**: Update Revenge to the latest version
+- 🔔 **Notifications**: Be notified when a new version of Revenge is available
+- 📃 **Changelog**: See the changelog of Revenge
 
-#### Prerequisites
-  - [Git](https://git-scm.com/downloads)
-  - [JDK 17](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html)
-  - [Android SDK](https://developer.android.com/studio)
+## 🔽 Download
 
-#### Instructions
+You can download the most recent version of Revenge Manager from
+[here](https://github.com/revenge-mod/revenge-manager/releases/latest).  
+Learn how to use Revenge Manager by following the [documentation](/docs).
 
-1. Clone the repo
-    - `git clone https://github.com/pyoncord/BunnyManager.git && cd BunnyManager`
-2. Build the project
-    - Linux: `chmod +x ./gradlew && gradlew assembleDebug`
-    - Windows: `./gradlew assembleDebug`
-3. Install on device
-    - [Enable USB debugging](https://developer.android.com/studio/debug/dev-options) and plug in your phone
-    - Run `adb install app/build/outputs/apk/debug/app-debug.apk`
+## 📚 Everything else
 
-## Contributing
+### 📙 Contributing
 
-This is an open-source project, you can do so without any programming.
+Thank you for considering contributing to Revenge Manager.
+You can find the contribution guidelines [here](CONTRIBUTING.md).
 
-Here are a few things you can do:
+### 🛠️ Building
 
-- [Test and report issues](https://github.com/pyoncord/BunnyManager/issues/new/choose)
-<!-- - [Translate the app into your language](https://crowdin.com/project/vendetta-manager) -->
-    
-License
----
-Bunny Manager is licensed under the Open Software License version 3.0
+To build a Revenge Manager, you can follow the [documentation](/docs).
 
-[![License: OSL v3](https://img.shields.io/badge/License-OSL%20v3-blue.svg?style=for-the-badge)](https://github.com/pyoncord/BunnyManager/blob/main/LICENSE)
+### 📃 Documentation
+
+You can find the documentation of Revenge Manager [here](/docs).
+
+## 📜 Licence
+
+Revenge Manager is licensed under the OSLv3 license. Please see the [license file](LICENSE) for more information.
