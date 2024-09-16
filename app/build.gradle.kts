@@ -17,8 +17,9 @@ android {
         applicationId = "app.revenge.manager"
         minSdk = 28
         targetSdk = 34
-        versionCode = 1000
-        versionName = "1.0.0"
+        versionName = version.toString()
+        versionCode = versionName!!.split("-").first().replace(".", "").toInt()
+
 
         buildConfigField("String", "GIT_BRANCH", "\"${getCurrentBranch()}\"")
         buildConfigField("String", "GIT_COMMIT", "\"${getLatestCommit()}\"")
