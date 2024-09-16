@@ -10,7 +10,7 @@ plugins {
 }
 
 android {
-    namespace = "dev.beefers.vendetta.manager"
+    namespace = "app.revenge.manager"
     compileSdk = 34
 
     defaultConfig {
@@ -19,6 +19,16 @@ android {
         targetSdk = 34
         versionCode = 1000
         versionName = "1.0.0"
+
+        buildConfigField("String", "MOD_NAME", "\"Revenge\"")
+        buildConfigField("String", "MANAGER_NAME", "\"RevengeManager\"")
+        buildConfigField("String", "REPO", "\"revenge-mod/revenge\"")
+        buildConfigField("String", "ORG_LINK", "\"https://github.com/revenge-mod\"")
+        buildConfigField("String", "INVITE_LINK", "\"https://discord.gg/ddcQf3s2Uq\"")
+        buildConfigField("String", "MODDED_APP_PACKAGE_NAME", "\"app.revenge.app\"")
+        buildConfigField("int", "MODDED_APP_ICON", "0xFEB23A42")
+        buildConfigField("int", "MODDED_APP_ICON_ALPHA", "0xFFFBB33C")
+        buildConfigField("int", "MODDED_APP_ICON_OTHER", "0xFFD3575E")
 
         buildConfigField("String", "GIT_BRANCH", "\"${getCurrentBranch()}\"")
         buildConfigField("String", "GIT_COMMIT", "\"${getLatestCommit()}\"")

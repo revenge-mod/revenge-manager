@@ -49,7 +49,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
-                <action android:name="dev.beefers.vendetta.actions.INSTALL" />
+                <action android:name="app.revenge.actions.INSTALL" />
                 <category android:name="android.intent.category.OPENABLE" />
             </intent-filter>
         </activity>

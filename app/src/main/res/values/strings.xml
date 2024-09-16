@@ -15,7 +15,7 @@
     <string name="msg_downgrade">Downgrade</string>
     <string name="msg_downgrade_disallowed">Cannot downgrade, try uninstalling first</string>
     <string name="msg_unlocked">You are now a developer</string>
-    <string name="msg_permission_grant">In order for Revenge Manager to function, file permissions are required. Since shared data is stored in ~/Revenge, permissions are required in order to access it.</string>
+    <string name="msg_permission_grant">File permissions are required to use shared storage.</string>
     <string name="msg_shizuku_denied">Failed to obtain Shizuku permissions</string>
     <string name="msg_change_mirror">Would you like to try again using a download mirror?</string>
     <string name="msg_invalid_apk">APK was corrupted, try clearing cache then reinstalling</string>
@@ -32,11 +32,11 @@
     <string name="step_dl_lib">Downloading libraries apk</string>
     <string name="step_dl_lang">Downloading language apk</string>
     <string name="step_dl_res">Downloading resources apk</string>
-    <string name="step_dl_vd">Downloading Revenge module</string>
+    <string name="step_dl_mod">Downloading Revenge</string>
 
     <string name="step_change_icon">Changing app icon</string>
     <string name="step_patch_manifests">Patching app manifests</string>
-    <string name="step_add_vd">Injecting Revenge</string>
+    <string name="step_add_mod">Injecting Revenge</string>
 
     <string name="step_signing">Signing APKs</string>
     <string name="step_installing">Installing APKs</string>
@@ -74,7 +74,7 @@
     <string name="action_reload">Reload</string>
     <string name="action_open_about">Open about</string>
     <string name="action_open_settings">Open settings</string>
-    <string name="action_tap_to_install">Tap to install Revenge Manager for Discord %1$s</string>
+    <string name="action_tap_to_install">Tap to install Revenge for Discord %1$s</string>
     <string name="action_confirm_exit">Exit anyways</string>
     <string name="action_dismiss_nevermind">Nevermind</string>
     <string name="action_dismiss_no_thanks">No thanks</string>
@@ -126,7 +126,7 @@
     <string name="settings_check_updates">Check for Discord updates</string>
 
     <string name="settings_customization">Customization</string>
-    <string name="settings_customization_description">Customize your Revenge install</string>
+    <string name="settings_customization_description">Customize your Revenge installation</string>
     <string name="settings_app_name">App name</string>
     <string name="settings_app_icon">Replace app icon</string>
     <string name="settings_app_icon_description">Uses the Revenge icon instead of Discord\'s</string>
@@ -153,7 +153,7 @@
     <string name="settings_logs_alternate_lines">Alternate lines</string>
     <string name="settings_logs_line_wrap">Wrap lines</string>
 
-    <string name="update_description">Version %1$s of Revenge Manager is now available!</string>
+    <string name="update_description">Revenge Manager %1$s is available!</string>
 
     <string name="channel_stable">Stable</string>
     <string name="channel_beta">Beta</string>
