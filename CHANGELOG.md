@@ -1,3 +1,10 @@
+# [1.0.0-dev.2](https://github.com/revenge-mod/revenge-manager/compare/v1.0.0-dev.1...v1.0.0-dev.2) (2024-09-16)
+
+
+### Features
+
+* Rebrand to Revenge ([#7](https://github.com/revenge-mod/revenge-manager/issues/7)) ([eb13258](https://github.com/revenge-mod/revenge-manager/commit/eb1325834acc8129d3b61e4ef9ab4cfd7c665f3f))
+
 # 1.0.0-dev.1 (2024-09-16)
 
 
