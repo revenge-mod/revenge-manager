@@ -7,6 +7,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.core.app.ShareCompat
 import androidx.core.content.FileProvider
+import app.revenge.manager.BuildConfig
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
 import app.revenge.manager.R
@@ -111,7 +112,7 @@ class InstallerViewModel(
         tempLogStorageDir.deleteRecursively()
         tempLogStorageDir.mkdirs()
 
-        val tmpFile = tempLogStorageDir.resolve("VD-Manager-${System.currentTimeMillis()}.log")
+        val tmpFile = tempLogStorageDir.resolve("${BuildConfig.MOD_NAME}-Manager-${System.currentTimeMillis()}.log")
         tmpFile.outputStream().use { stream ->
             stream.write(logsString.toByteArray())
         }

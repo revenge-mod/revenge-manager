@@ -35,6 +35,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
+import app.revenge.manager.BuildConfig
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -114,7 +115,7 @@ class LogViewerScreen(
                     mutableStateOf(false)
                 }
 
-                IconButton(onClick = { saveFile.launch("VD-Manager-${System.currentTimeMillis()}.log") }) {
+                IconButton(onClick = { saveFile.launch("${BuildConfig.MOD_NAME}-Manager-${System.currentTimeMillis()}.log") }) {
                     Icon(
                         imageVector = Icons.Outlined.Save,
                         contentDescription = stringResource(R.string.action_save_logs)

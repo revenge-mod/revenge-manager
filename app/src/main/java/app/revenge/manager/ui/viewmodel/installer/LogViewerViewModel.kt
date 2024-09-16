@@ -41,7 +41,7 @@ class LogViewerViewModel(
         tempLogStorageDir.deleteRecursively()
         tempLogStorageDir.mkdirs()
 
-        val tmpFile = tempLogStorageDir.resolve("VD-Manager-${System.currentTimeMillis()}.log")
+        val tmpFile = tempLogStorageDir.resolve("${BuildConfig.MOD_NAME}-Manager-${System.currentTimeMillis()}.log")
         tmpFile.outputStream().use { stream ->
             stream.write(logsString.toByteArray())
         }
