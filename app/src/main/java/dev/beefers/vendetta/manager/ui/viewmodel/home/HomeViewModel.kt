@@ -26,6 +26,7 @@ import dev.beefers.vendetta.manager.network.dto.Release
 import dev.beefers.vendetta.manager.network.utils.CommitsPagingSource
 import dev.beefers.vendetta.manager.network.utils.dataOrNull
 import dev.beefers.vendetta.manager.network.utils.ifSuccessful
+import dev.beefers.vendetta.manager.utils.Constants
 import dev.beefers.vendetta.manager.utils.DiscordVersion
 import dev.beefers.vendetta.manager.utils.isMiui
 import kotlinx.coroutines.launch
@@ -42,7 +43,7 @@ class HomeViewModel(
     private val cacheDir = context.externalCacheDir ?: File(
         Environment.getExternalStorageDirectory(),
         Environment.DIRECTORY_DOWNLOADS
-    ).resolve("BunnyManager").also { it.mkdirs() }
+    ).resolve(Constants.MANAGER_NAME).also { it.mkdirs() }
 
     var discordVersions by mutableStateOf<Map<DiscordVersion.Type, DiscordVersion?>?>(null)
         private set

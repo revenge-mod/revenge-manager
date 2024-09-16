@@ -16,6 +16,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import dev.beefers.vendetta.manager.R
 import dev.beefers.vendetta.manager.domain.manager.PreferenceManager
+import dev.beefers.vendetta.manager.utils.Constants
 import dev.beefers.vendetta.manager.utils.DiscordVersion
 import org.koin.androidx.compose.get
 
@@ -29,9 +30,9 @@ fun ThemePreview(
     val layerModifier = Modifier.height(300.dp)
     val iconColor = remember(prefs.patchIcon, prefs.channel) {
         when {
-            prefs.patchIcon -> Color(0xFF48488B)
-            prefs.channel == DiscordVersion.Type.ALPHA -> Color(0xFFFBB33C)
-            else -> Color(0xFF5865F2)
+            prefs.patchIcon -> Constants.MOD_COLOR
+            prefs.channel == DiscordVersion.Type.ALPHA -> Constants.MOD_COLOR_ALPHA
+            else -> Constants.MOD_COLOR_OTHER
         }
     }
 

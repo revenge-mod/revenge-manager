@@ -1,6 +1,6 @@
 [versions]
 # Plugins
-agp = "8.3.2"
+agp = "8.6.0"
 kotlin = "1.9.21"
 
 # AndroidX

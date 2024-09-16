@@ -13,6 +13,7 @@ import dev.beefers.vendetta.manager.domain.manager.PreferenceManager
 import dev.beefers.vendetta.manager.domain.manager.UpdateCheckerDuration
 import dev.beefers.vendetta.manager.installer.shizuku.ShizukuPermissions
 import dev.beefers.vendetta.manager.updatechecker.worker.UpdateWorker
+import dev.beefers.vendetta.manager.utils.Constants
 import dev.beefers.vendetta.manager.utils.showToast
 import kotlinx.coroutines.launch
 import java.io.File
@@ -21,7 +22,7 @@ class AdvancedSettingsViewModel(
     private val context: Context,
     private val prefs: PreferenceManager,
 ) : ScreenModel {
-    private val cacheDir = context.externalCacheDir ?: File(Environment.getExternalStorageDirectory(), Environment.DIRECTORY_DOWNLOADS).resolve("BunnyManager").also { it.mkdirs() }
+    private val cacheDir = context.externalCacheDir ?: File(Environment.getExternalStorageDirectory(), Environment.DIRECTORY_DOWNLOADS).resolve(Constants.MANAGER_NAME).also { it.mkdirs() }
 
     fun clearCache() {
         cacheDir.deleteRecursively()

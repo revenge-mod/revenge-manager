@@ -19,6 +19,7 @@ import dev.beefers.vendetta.manager.installer.utils.ArscUtil.getMainArscChunk
 import dev.beefers.vendetta.manager.installer.utils.ArscUtil.getPackageChunk
 import dev.beefers.vendetta.manager.installer.utils.ArscUtil.getResourceFileName
 import dev.beefers.vendetta.manager.installer.utils.AxmlUtil
+import dev.beefers.vendetta.manager.utils.Constants
 import dev.beefers.vendetta.manager.utils.DiscordVersion
 import dev.beefers.vendetta.manager.utils.getResBytes
 import org.koin.core.component.inject
@@ -47,7 +48,7 @@ class ReplaceIconStep : Step() {
 
         runner.logger.i("Patching icon assets (squareIcon=$squareIconFile, roundIcon=$roundIconFile)")
 
-        val backgroundColor = arsc.getPackageChunk().addColorResource("bunny_color", Color(0xFF48488B))
+        val backgroundColor = arsc.getPackageChunk().addColorResource("brand", Constants.MOD_COLOR)
 
         val postfix = when (preferences.channel) {
             DiscordVersion.Type.BETA -> "beta"

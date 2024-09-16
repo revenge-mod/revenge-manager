@@ -4,7 +4,9 @@ import android.app.DownloadManager
 import android.content.Context
 import android.database.Cursor
 import android.net.Uri
+import androidx.compose.ui.unit.Constraints
 import androidx.core.content.getSystemService
+import dev.beefers.vendetta.manager.utils.Constants
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
@@ -54,7 +56,7 @@ class DownloadManager(
             ?: throw IllegalStateException("DownloadManager service is not available")
 
         val downloadId = DownloadManager.Request(Uri.parse(url))
-            .setTitle("Bunny Manager")
+            .setTitle("${Constants.MOD_NAME} Manager")
             .setDescription("Downloading ${out.name}...")
             .setDestinationUri(Uri.fromFile(out))
             .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE)

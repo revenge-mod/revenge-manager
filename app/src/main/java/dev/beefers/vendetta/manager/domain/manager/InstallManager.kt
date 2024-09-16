@@ -11,6 +11,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import dev.beefers.vendetta.manager.installer.session.InstallService
+import dev.beefers.vendetta.manager.utils.Constants
 
 class InstallManager(
     private val context: Context,
@@ -28,7 +29,7 @@ class InstallManager(
             when {
                 Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU -> {
                     context.packageManager.getPackageInfo(
-                        prefs.packageName.ifBlank { "io.github.pyoncord.app" },
+                        prefs.packageName.ifBlank { Constants.PACKAGE_NAME },
                         PackageManager.PackageInfoFlags.of(
                             0L
                         )
@@ -37,7 +38,7 @@ class InstallManager(
 
                 else -> {
                     context.packageManager.getPackageInfo(
-                        prefs.packageName.ifBlank { "io.github.pyoncord.app" },
+                        prefs.packageName.ifBlank { Constants.PACKAGE_NAME },
                         0
                     )
                 }

@@ -21,6 +21,7 @@ import dev.beefers.vendetta.manager.installer.step.patching.PresignApksStep
 import dev.beefers.vendetta.manager.installer.step.patching.ReplaceIconStep
 import dev.beefers.vendetta.manager.installer.util.LogEntry
 import dev.beefers.vendetta.manager.installer.util.Logger
+import dev.beefers.vendetta.manager.utils.Constants
 import dev.beefers.vendetta.manager.utils.DiscordVersion
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
@@ -44,14 +45,14 @@ class StepRunner(
     private val preferenceManager: PreferenceManager by inject()
     private val context: Context by inject()
     private val debugInfo = """
-            Bunny Manager v${BuildConfig.VERSION_NAME}
+            ${Constants.MOD_NAME} Manager v${BuildConfig.VERSION_NAME}
             Built from commit ${BuildConfig.GIT_COMMIT} on ${BuildConfig.GIT_BRANCH} ${if (BuildConfig.GIT_LOCAL_CHANGES || BuildConfig.GIT_LOCAL_COMMITS) "(Changes Present)" else ""}
             
             Running Android ${Build.VERSION.RELEASE}, API level ${Build.VERSION.SDK_INT}
             Supported ABIs: ${Build.SUPPORTED_ABIS.joinToString()}
             Device: ${Build.MANUFACTURER} - ${Build.MODEL} (${Build.DEVICE})
             ${if(Build.VERSION.SDK_INT > Build.VERSION_CODES.S) "SOC: ${Build.SOC_MANUFACTURER} ${Build.SOC_MODEL}\n" else "\n\n"} 
-            Adding Bunny to Discord v$discordVersion
+            Adding ${Constants.MOD_NAME} to Discord v$discordVersion
             
             
         """.trimIndent()
@@ -71,7 +72,7 @@ class StepRunner(
     private val cacheDir =
         context.externalCacheDir
         ?: File(Environment.getExternalStorageDirectory(), Environment.DIRECTORY_DOWNLOADS)
-            .resolve("BunnyManager")
+            .resolve(Constants.MANAGER_NAME)
             .also { it.mkdirs() }
 
     /**

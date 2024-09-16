@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import dev.beefers.vendetta.manager.R
+import dev.beefers.vendetta.manager.utils.Constants
 import dev.beefers.vendetta.manager.utils.DiscordVersion
 
 @Composable
@@ -22,9 +23,9 @@ fun AppIcon(
 ) {
     val iconColor = remember(customIcon, releaseChannel) {
         when {
-            customIcon -> Color(0xFF48488B)
-            releaseChannel == DiscordVersion.Type.ALPHA -> Color(0xFFFBB33C)
-            else -> Color(0xFF5865F2)
+            customIcon -> Constants.MOD_COLOR
+            releaseChannel == DiscordVersion.Type.ALPHA -> Constants.MOD_COLOR_ALPHA
+            else -> Constants.MOD_COLOR_OTHER
         }
     }
 

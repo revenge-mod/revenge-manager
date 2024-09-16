@@ -8,7 +8,7 @@ import java.io.File
 /**
  * Downloads the Vendetta XPosed module
  *
- * https://github.com/pyoncord/BunnyXposed
+ * https://github.com/revenge-mod/revenge-xposed
  */
 @Stable
 class DownloadVendettaStep(

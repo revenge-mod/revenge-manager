@@ -4,8 +4,10 @@ import android.content.Context
 import android.os.Build
 import android.os.Environment
 import androidx.annotation.StringRes
+import androidx.compose.ui.unit.Constraints
 import dev.beefers.vendetta.manager.R
 import dev.beefers.vendetta.manager.domain.manager.base.BasePreferenceManager
+import dev.beefers.vendetta.manager.utils.Constants
 import dev.beefers.vendetta.manager.utils.DiscordVersion
 import java.io.File
 import java.util.concurrent.TimeUnit
@@ -14,11 +16,11 @@ class PreferenceManager(context: Context) :
     BasePreferenceManager(context.getSharedPreferences("prefs", Context.MODE_PRIVATE)) {
 
     val DEFAULT_MODULE_LOCATION =
-        (context.externalCacheDir ?: File(Environment.getExternalStorageDirectory(), Environment.DIRECTORY_DOWNLOADS).resolve("BunnyManager").also { it.mkdirs() }).resolve("xposed.apk")
+        (context.externalCacheDir ?: File(Environment.getExternalStorageDirectory(), Environment.DIRECTORY_DOWNLOADS).resolve(Constants.MANAGER_NAME).also { it.mkdirs() }).resolve("xposed.apk")
 
-    var packageName by stringPreference("package_name", "io.github.pyoncord.app")
+    var packageName by stringPreference("package_name", Constants.PACKAGE_NAME)
 
-    var appName by stringPreference("app_name", "Bunny")
+    var appName by stringPreference("app_name", Constants.MOD_NAME)
 
     var discordVersion by stringPreference("discord_version", "")
 
