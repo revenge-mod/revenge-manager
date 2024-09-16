@@ -8,6 +8,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import app.revenge.manager.domain.manager.PreferenceManager
+import app.revenge.manager.domain.repository.RestRepository
 import app.revenge.manager.installer.step.download.DownloadBaseStep
 import app.revenge.manager.installer.step.download.DownloadLangStep
 import app.revenge.manager.installer.step.download.DownloadLibsStep
@@ -20,10 +21,13 @@ import app.revenge.manager.installer.step.patching.PresignApksStep
 import app.revenge.manager.installer.step.patching.ReplaceIconStep
 import app.revenge.manager.installer.util.LogEntry
 import app.revenge.manager.installer.util.Logger
+import app.revenge.manager.network.utils.dataOrNull
+import app.revenge.manager.network.utils.dataOrThrow
 import app.revenge.manager.utils.DiscordVersion
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.io.File
@@ -41,6 +45,8 @@ class StepRunner(
 ): KoinComponent {
 
     private val preferenceManager: PreferenceManager by inject()
+    private val repo: RestRepository by inject()
+
     private val context: Context by inject()
     private val debugInfo = """
             ${app.revenge.manager.BuildConfig.MOD_NAME} Manager v${app.revenge.manager.BuildConfig.VERSION_NAME}
@@ -119,7 +125,11 @@ class StepRunner(
         add(DownloadLibsStep(discordCacheDir, patchedDir, discordVersion.toVersionCode()))
         add(DownloadLangStep(discordCacheDir, patchedDir, discordVersion.toVersionCode()))
         add(DownloadResourcesStep(discordCacheDir, patchedDir, discordVersion.toVersionCode()))
-        add(DownloadModStep(patchedDir))
+        add(DownloadModStep(patchedDir, runBlocking {
+            repo.getLatestRelease("revenge/revenge-xposed").dataOrThrow.assets.first {
+                it.name.endsWith("apk")
+            }.downloadUrl
+        }))
 
         // Patching
         if (preferenceManager.patchIcon) add(ReplaceIconStep())
@@ -136,10 +146,7 @@ class StepRunner(
      * This is used to retrieve previously executed dependency steps from a later step.
      */
     inline fun <reified T : Step> getCompletedStep(): T {
-        val step = steps.asSequence()
-            .filterIsInstance<T>()
-            .filter { it.status == StepStatus.SUCCESSFUL }
-            .firstOrNull()
+        val step = steps.asSequence().filterIsInstance<T>().filter { it.status == StepStatus.SUCCESSFUL }.firstOrNull()
 
         if (step == null) {
             throw IllegalArgumentException("No completed step ${T::class.simpleName} exists in container")

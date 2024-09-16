@@ -13,30 +13,7 @@ import java.io.File
 
 class DownloadManager(
     private val context: Context,
-    private val prefs: PreferenceManager
 ) {
-
-    suspend fun downloadDiscordApk(version: String, out: File, onProgressUpdate: (Float?) -> Unit): DownloadResult =
-        download("${prefs.mirror.baseUrl}/tracker/download/$version/base", out, onProgressUpdate)
-
-    suspend fun downloadSplit(version: String, split: String, out: File, onProgressUpdate: (Float?) -> Unit): DownloadResult =
-        download("${prefs.mirror.baseUrl}/tracker/download/$version/$split", out, onProgressUpdate)
-
-    suspend fun downloadMod(out: File, onProgressUpdate: (Float?) -> Unit) =
-        download(
-            "https://github.com/revenge-mod/revenge-xposed/releases/latest/download/app-release.apk",
-            out,
-            onProgressUpdate
-        )
-
-    suspend fun downloadUpdate(out: File) =
-        download(
-            "https://github.com/revenge-mod/revenge-manager/releases/latest/download/Manager.apk",
-            out
-        ) {
-            /* TODO: Update a progress bar in the update dialog */
-        }
-
     /**
      * Start a cancellable download with the system [DownloadManager].
      * If the current [CoroutineScope] is cancelled, then the system download will be cancelled

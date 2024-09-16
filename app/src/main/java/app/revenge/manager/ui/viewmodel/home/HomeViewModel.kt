@@ -125,7 +125,12 @@ class HomeViewModel(
             val update = File(cacheDir, "update.apk")
             if (update.exists()) update.delete()
             isUpdating = true
-            downloadManager.downloadUpdate(update)
+            downloadManager.download(
+                release!!.assets.first { it.name.endsWith("apk") }.downloadUrl,
+                update
+            ) {
+                /* TODO: Update a progress bar in the update dialog */
+            }
             isUpdating = false
 
             val installer: Installer = when (prefs.installMethod) {

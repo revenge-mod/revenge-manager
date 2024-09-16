@@ -28,9 +28,9 @@ class ManagerApplication : Application() {
             androidContext(this@ManagerApplication)
             modules(
                 httpModule,
+                repositoryModule,
                 managerModule,
                 viewModelModule,
-                repositoryModule
             )
         }
 

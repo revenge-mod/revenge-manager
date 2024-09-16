@@ -12,12 +12,12 @@ import java.io.File
  */
 @Stable
 class DownloadModStep(
-    workingDir: File
+    workingDir: File,
+    override val url: String
 ): DownloadStep() {
 
     override val nameRes = R.string.step_dl_mod
 
-    override val url: String = "https://github.com/revenge-mod/revenge-xposed/releases/latest/download/app-release.apk"
     override val destination = preferenceManager.moduleLocation
     override val workingCopy = workingDir.resolve("xposed.apk")
 
