@@ -1,3 +1,10 @@
+# [1.0.0-dev.3](https://github.com/revenge-mod/revenge-manager/compare/v1.0.0-dev.2...v1.0.0-dev.3) (2024-09-18)
+
+
+### Bug Fixes
+
+* Appearance tab causing crashes ([bdff280](https://github.com/revenge-mod/revenge-manager/commit/bdff280e29a6cb316ac8ad936621281c8c1f8c18))
+
 # [1.0.0-dev.2](https://github.com/revenge-mod/revenge-manager/compare/v1.0.0-dev.1...v1.0.0-dev.2) (2024-09-16)
 
 
