@@ -32,7 +32,7 @@ fun mainThread(block: () -> Unit) {
 fun Context.copyText(text: String) {
     val clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
 
-    clipboardManager.setPrimaryClip(ClipData.newPlainText(app.revenge.manager.BuildConfig.APPLICATION_ID, text))
+    clipboardManager.setPrimaryClip(ClipData.newPlainText(BuildConfig.APPLICATION_ID, text))
 }
 
 fun Context.showToast(@StringRes res: Int, vararg params: Any, short: Boolean = true) {

@@ -50,7 +50,7 @@ class ManagerApplication : Application() {
         val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         val updates = NotificationChannel(
-            "${app.revenge.manager.BuildConfig.APPLICATION_ID}.notifications.UPDATE",
+            "${BuildConfig.APPLICATION_ID}.notifications.UPDATE",
             "Discord updates",
             NotificationManager.IMPORTANCE_DEFAULT
         )

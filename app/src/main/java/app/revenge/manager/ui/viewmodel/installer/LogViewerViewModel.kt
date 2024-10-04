@@ -53,7 +53,7 @@ class LogViewerViewModel(
         val saved = saveToAppStorage()
         val uri = FileProvider.getUriForFile(
             activityContext,
-            app.revenge.manager.BuildConfig.APPLICATION_ID + ".provider",
+            BuildConfig.APPLICATION_ID + ".provider",
             saved
         )
 

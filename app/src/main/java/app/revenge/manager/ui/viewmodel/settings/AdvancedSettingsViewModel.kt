@@ -23,7 +23,7 @@ class AdvancedSettingsViewModel(
     private val prefs: PreferenceManager,
 ) : ScreenModel {
     private val cacheDir = context.externalCacheDir ?: File(Environment.getExternalStorageDirectory(), Environment.DIRECTORY_DOWNLOADS).resolve(
-        app.revenge.manager.BuildConfig.MANAGER_NAME).also { it.mkdirs() }
+        BuildConfig.MANAGER_NAME).also { it.mkdirs() }
 
     fun clearCache() {
         cacheDir.deleteRecursively()

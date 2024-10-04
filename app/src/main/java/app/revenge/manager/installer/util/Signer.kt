@@ -54,7 +54,7 @@ object Signer : KoinComponent {
         val certificate = keyStore.getCertificate(alias) as X509Certificate
 
         ApkSigner.SignerConfig.Builder(
-            app.revenge.manager.BuildConfig.MOD_NAME,
+            BuildConfig.MOD_NAME,
             keyStore.getKey(alias, password) as PrivateKey,
             listOf(certificate)
         ).build()
@@ -76,7 +76,7 @@ object Signer : KoinComponent {
         do serialNumber = SecureRandom().nextInt().toBigInteger()
         while (serialNumber < BigInteger.ZERO)
 
-        val x500Name = X500Name("CN=${app.revenge.manager.BuildConfig.MOD_NAME} Manager")
+        val x500Name = X500Name("CN=${BuildConfig.MOD_NAME} Manager")
         val pair = KeyPairGenerator.getInstance("RSA").run {
             initialize(2048)
             generateKeyPair()

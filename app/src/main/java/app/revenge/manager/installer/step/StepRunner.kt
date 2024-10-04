@@ -7,6 +7,7 @@ import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import app.revenge.manager.BuildConfig
 import app.revenge.manager.domain.manager.PreferenceManager
 import app.revenge.manager.installer.step.download.DownloadBaseStep
 import app.revenge.manager.installer.step.download.DownloadLangStep
@@ -43,14 +44,14 @@ class StepRunner(
     private val preferenceManager: PreferenceManager by inject()
     private val context: Context by inject()
     private val debugInfo = """
-            ${app.revenge.manager.BuildConfig.MOD_NAME} Manager v${app.revenge.manager.BuildConfig.VERSION_NAME}
-            Built from commit ${app.revenge.manager.BuildConfig.GIT_COMMIT} on ${app.revenge.manager.BuildConfig.GIT_BRANCH} ${if (app.revenge.manager.BuildConfig.GIT_LOCAL_CHANGES || app.revenge.manager.BuildConfig.GIT_LOCAL_COMMITS) "(Changes Present)" else ""}
+            ${BuildConfig.MOD_NAME} Manager v${BuildConfig.VERSION_NAME}
+            Built from commit ${BuildConfig.GIT_COMMIT} on ${BuildConfig.GIT_BRANCH} ${if (BuildConfig.GIT_LOCAL_CHANGES || BuildConfig.GIT_LOCAL_COMMITS) "(Changes Present)" else ""}
             
             Running Android ${Build.VERSION.RELEASE}, API level ${Build.VERSION.SDK_INT}
             Supported ABIs: ${Build.SUPPORTED_ABIS.joinToString()}
             Device: ${Build.MANUFACTURER} - ${Build.MODEL} (${Build.DEVICE})
             ${if(Build.VERSION.SDK_INT > Build.VERSION_CODES.S) "SOC: ${Build.SOC_MANUFACTURER} ${Build.SOC_MODEL}\n" else "\n\n"} 
-            Adding ${app.revenge.manager.BuildConfig.MOD_NAME} to Discord v$discordVersion
+            Adding ${BuildConfig.MOD_NAME} to Discord v$discordVersion
             
             
         """.trimIndent()
@@ -70,7 +71,7 @@ class StepRunner(
     private val cacheDir =
         context.externalCacheDir
         ?: File(Environment.getExternalStorageDirectory(), Environment.DIRECTORY_DOWNLOADS)
-            .resolve(app.revenge.manager.BuildConfig.MANAGER_NAME)
+            .resolve(BuildConfig.MANAGER_NAME)
             .also { it.mkdirs() }
 
     /**

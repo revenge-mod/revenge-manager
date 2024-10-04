@@ -1,5 +1,6 @@
 package app.revenge.manager.installer.step.patching
 
+import app.revenge.manager.BuildConfig
 import app.revenge.manager.R
 import app.revenge.manager.installer.step.Step
 import app.revenge.manager.installer.step.StepGroup
@@ -24,7 +25,7 @@ class AddModStep(
     override suspend fun run(runner: StepRunner) {
         val mod = runner.getCompletedStep<DownloadModStep>().workingCopy
 
-        runner.logger.i("Adding ${app.revenge.manager.BuildConfig.MOD_NAME}Xposed module with LSPatch")
+        runner.logger.i("Adding ${BuildConfig.MOD_NAME}Xposed module with LSPatch")
         val files = signedDir.listFiles()
             ?.takeIf { it.isNotEmpty() }
             ?: throw Error("Missing APKs from signing step")

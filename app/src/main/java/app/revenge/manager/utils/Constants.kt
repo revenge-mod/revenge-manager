@@ -10,7 +10,7 @@ object Constants {
     )
 
     // NOTE: This is no longer used
-    val MOD_DIR = Environment.getExternalStorageDirectory().resolve(app.revenge.manager.BuildConfig.MOD_NAME)
+    val MOD_DIR = Environment.getExternalStorageDirectory().resolve(BuildConfig.MOD_NAME)
 
     val DUMMY_VERSION = DiscordVersion(1, 0, DiscordVersion.Type.STABLE)
 }
@@ -18,17 +18,17 @@ object Constants {
 object Intents {
 
     object Actions {
-        const val INSTALL = "${app.revenge.manager.BuildConfig.APPLICATION_ID}.intents.actions.INSTALL"
+        const val INSTALL = "${BuildConfig.APPLICATION_ID}.intents.actions.INSTALL"
     }
 
     object Extras {
-        const val VERSION = "${app.revenge.manager.BuildConfig.APPLICATION_ID}.intents.extras.VERSION"
+        const val VERSION = "${BuildConfig.APPLICATION_ID}.intents.extras.VERSION"
     }
 
 }
 
 object Channels {
-    const val UPDATE = "${app.revenge.manager.BuildConfig.APPLICATION_ID}.notifications.UPDATE"
+    const val UPDATE = "${BuildConfig.APPLICATION_ID}.notifications.UPDATE"
 }
 
 data class TeamMember(

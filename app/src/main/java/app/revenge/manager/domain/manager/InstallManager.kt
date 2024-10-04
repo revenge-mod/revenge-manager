@@ -29,7 +29,7 @@ class InstallManager(
             when {
                 Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU -> {
                     context.packageManager.getPackageInfo(
-                        prefs.packageName.ifBlank { app.revenge.manager.BuildConfig.MODDED_APP_PACKAGE_NAME },
+                        prefs.packageName.ifBlank { BuildConfig.MODDED_APP_PACKAGE_NAME },
                         PackageManager.PackageInfoFlags.of(
                             0L
                         )
@@ -38,7 +38,7 @@ class InstallManager(
 
                 else -> {
                     context.packageManager.getPackageInfo(
-                        prefs.packageName.ifBlank { app.revenge.manager.BuildConfig.MODDED_APP_PACKAGE_NAME },
+                        prefs.packageName.ifBlank { BuildConfig.MODDED_APP_PACKAGE_NAME },
                         0
                     )
                 }

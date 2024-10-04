@@ -30,9 +30,9 @@ fun ThemePreview(
     val layerModifier = Modifier.height(300.dp)
     val iconColor = remember(prefs.patchIcon, prefs.channel) {
         when {
-            prefs.patchIcon -> Color(app.revenge.manager.BuildConfig.MODDED_APP_ICON)
-            prefs.channel == DiscordVersion.Type.ALPHA -> Color(app.revenge.manager.BuildConfig.MODDED_APP_ICON_ALPHA)
-            else -> Color(app.revenge.manager.BuildConfig.MODDED_APP_ICON_OTHER)
+            prefs.patchIcon -> Color(BuildConfig.MODDED_APP_ICON)
+            prefs.channel == DiscordVersion.Type.ALPHA -> Color(BuildConfig.MODDED_APP_ICON_ALPHA)
+            else -> Color(BuildConfig.MODDED_APP_ICON_OTHER)
         }
     }
 

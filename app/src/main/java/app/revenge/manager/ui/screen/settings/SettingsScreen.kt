@@ -89,10 +89,10 @@ class SettingsScreen : Screen {
                     text = stringResource(R.string.title_about),
                     subtext = buildString {
                         append(stringResource(R.string.app_name))
-                        append(" v${app.revenge.manager.BuildConfig.VERSION_NAME}")
+                        append(" v${BuildConfig.VERSION_NAME}")
                         if (preferences.isDeveloper) {
-                            append(" (${app.revenge.manager.BuildConfig.GIT_COMMIT}")
-                            if (app.revenge.manager.BuildConfig.GIT_LOCAL_CHANGES || app.revenge.manager.BuildConfig.GIT_LOCAL_COMMITS) {
+                            append(" (${BuildConfig.GIT_COMMIT}")
+                            if (BuildConfig.GIT_LOCAL_CHANGES || BuildConfig.GIT_LOCAL_COMMITS) {
                                 append(" - Local")
                             }
                             append(")")

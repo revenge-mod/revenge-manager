@@ -12,6 +12,7 @@ import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -35,7 +36,7 @@ fun LinkItem(
         modifier = Modifier
             .clickable(
                 onClick = { uriHandler.openUri(link) },
-                indication = rememberRipple(bounded = false, radius = 40.dp),
+                indication = ripple(bounded = false, radius = 40.dp),
                 interactionSource = remember { MutableInteractionSource() }
             )
             .padding(8.dp)

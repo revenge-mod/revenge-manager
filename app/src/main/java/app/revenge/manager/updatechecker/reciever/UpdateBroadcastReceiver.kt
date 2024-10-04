@@ -24,7 +24,7 @@ class UpdateBroadcastReceiver : BroadcastReceiver() {
         val clickIntent = PendingIntent.getActivity(
             context,
             notificationId,
-            context.packageManager.getLaunchIntentForPackage(app.revenge.manager.BuildConfig.APPLICATION_ID)!!.apply {
+            context.packageManager.getLaunchIntentForPackage(BuildConfig.APPLICATION_ID)!!.apply {
                 action = Intents.Actions.INSTALL
                 putExtra(Intents.Extras.VERSION, versionCode)
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)

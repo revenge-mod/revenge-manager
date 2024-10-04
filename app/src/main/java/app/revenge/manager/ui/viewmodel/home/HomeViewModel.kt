@@ -11,6 +11,7 @@ import androidx.compose.runtime.setValue
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
+import app.revenge.manager.BuildConfig
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
 import app.revenge.manager.domain.manager.DownloadManager
@@ -41,7 +42,7 @@ class HomeViewModel(
     private val cacheDir = context.externalCacheDir ?: File(
         Environment.getExternalStorageDirectory(),
         Environment.DIRECTORY_DOWNLOADS
-    ).resolve(app.revenge.manager.BuildConfig.MANAGER_NAME).also { it.mkdirs() }
+    ).resolve(BuildConfig.MANAGER_NAME).also { it.mkdirs() }
 
     var discordVersions by mutableStateOf<Map<DiscordVersion.Type, DiscordVersion?>?>(null)
         private set
@@ -108,7 +109,7 @@ class HomeViewModel(
         screenModelScope.launch {
             release = repo.getLatestRelease("revenge/revenge-manager").dataOrNull
             release?.let {
-                showUpdateDialog = it.tagName.toInt() > app.revenge.manager.BuildConfig.VERSION_CODE
+                showUpdateDialog = it.tagName.toInt() > BuildConfig.VERSION_CODE
             }
             repo.getLatestRelease("revenge/revenge-xposed").ifSuccessful {
                 if (prefs.moduleVersion != it.tagName) {

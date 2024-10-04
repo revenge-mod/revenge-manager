@@ -45,7 +45,7 @@ private fun ManageStorageDialog() {
                 Button(
                     onClick = {
                         Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
-                            .setData("package:${app.revenge.manager.BuildConfig.APPLICATION_ID}".toUri())
+                            .setData("package:${BuildConfig.APPLICATION_ID}".toUri())
                             .let { launcher.launch(it) }
                     }
                 ) {

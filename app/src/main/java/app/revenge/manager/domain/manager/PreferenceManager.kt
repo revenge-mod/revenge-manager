@@ -16,11 +16,11 @@ class PreferenceManager(context: Context) :
 
     val DEFAULT_MODULE_LOCATION =
         (context.externalCacheDir ?: File(Environment.getExternalStorageDirectory(), Environment.DIRECTORY_DOWNLOADS).resolve(
-            app.revenge.manager.BuildConfig.MANAGER_NAME).also { it.mkdirs() }).resolve("xposed.apk")
+            BuildConfig.MANAGER_NAME).also { it.mkdirs() }).resolve("xposed.apk")
 
-    var packageName by stringPreference("package_name", app.revenge.manager.BuildConfig.MODDED_APP_PACKAGE_NAME)
+    var packageName by stringPreference("package_name", BuildConfig.MODDED_APP_PACKAGE_NAME)
 
-    var appName by stringPreference("app_name", app.revenge.manager.BuildConfig.MOD_NAME)
+    var appName by stringPreference("app_name", BuildConfig.MOD_NAME)
 
     var discordVersion by stringPreference("discord_version", "")
 

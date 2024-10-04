@@ -43,7 +43,7 @@ class ReplaceIconStep : Step() {
 
         runner.logger.i("Patching icon assets (squareIcon=$squareIconFile, roundIcon=$roundIconFile)")
 
-        val backgroundColor = arsc.getPackageChunk().addColorResource("brand", Color(app.revenge.manager.BuildConfig.MODDED_APP_ICON))
+        val backgroundColor = arsc.getPackageChunk().addColorResource("brand", Color(BuildConfig.MODDED_APP_ICON))
 
         val postfix = when (preferences.channel) {
             DiscordVersion.Type.BETA -> "beta"

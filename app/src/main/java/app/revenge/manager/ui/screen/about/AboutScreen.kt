@@ -106,7 +106,7 @@ class AboutScreen : Screen {
                     )
 
                     Text(
-                        text = "v${app.revenge.manager.BuildConfig.VERSION_NAME} (${app.revenge.manager.BuildConfig.VERSION_CODE})",
+                        text = "v${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})",
                         style = MaterialTheme.typography.labelLarge,
                         color = LocalContentColor.current.copy(alpha = 0.5f),
                         modifier = Modifier.clickable(
@@ -133,13 +133,13 @@ class AboutScreen : Screen {
                         LinkItem(
                             icon = R.drawable.ic_github,
                             label = R.string.label_github,
-                            link = app.revenge.manager.BuildConfig.ORG_LINK
+                            link = BuildConfig.ORG_LINK
                         )
 
                         LinkItem(
                             icon = R.drawable.ic_discord,
                             label = R.string.label_discord,
-                            link = app.revenge.manager.BuildConfig.INVITE_LINK
+                            link = BuildConfig.INVITE_LINK
                         )
                     }
                 }
