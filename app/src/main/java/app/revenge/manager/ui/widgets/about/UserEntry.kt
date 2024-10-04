@@ -11,6 +11,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.ripple
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -37,7 +38,7 @@ fun UserEntry(
         modifier = Modifier
             .clickable(
                 onClick = { uriHandler.openUri("https://github.com/$username") },
-                indication = rememberRipple(bounded = false, radius = 90.dp),
+                indication = ripple(bounded = false, radius = 90.dp),
                 interactionSource = remember { MutableInteractionSource() }
             )
             .widthIn(min = 100.dp)

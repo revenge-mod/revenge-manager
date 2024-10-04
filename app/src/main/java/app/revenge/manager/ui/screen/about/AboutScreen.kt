@@ -51,10 +51,7 @@ import app.revenge.manager.ui.screen.libraries.LibrariesScreen
 import app.revenge.manager.ui.widgets.about.LinkItem
 import app.revenge.manager.ui.widgets.about.ListItem
 import app.revenge.manager.ui.widgets.about.UserEntry
-import app.revenge.manager.utils.Constants
-import app.revenge.manager.utils.DimenUtils
-import app.revenge.manager.utils.getBitmap
-import app.revenge.manager.utils.showToast
+import app.revenge.manager.utils.*
 import org.koin.androidx.compose.get
 
 class AboutScreen : Screen {
@@ -67,7 +64,7 @@ class AboutScreen : Screen {
         val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
         val ctx = LocalContext.current
         val bitmap = remember {
-            ctx.getBitmap(R.drawable.ic_launcher, 60).asImageBitmap()
+            ctx.getBitmap(R.mipmap.ic_launcher, 60).asImageBitmap()
         }
         var tapCount by remember {
             mutableIntStateOf(0)
@@ -151,9 +148,9 @@ class AboutScreen : Screen {
                         .fillMaxWidth()
                         .padding(top = 16.dp, bottom = 20.dp)
                 ) {
-                    UserEntry("Fiery", "Lead dev\niOS", "FieryFlames")
-                    UserEntry("Maisy", "Creator\nVendetta", "maisymoe", isLarge = true)
-                    UserEntry("Wing", "Lead dev\nManager", "wingio")
+                    UserEntry("oSumAtrIX", "Developer", "osumatrix")
+                    UserEntry("Palm", "Lead developer", "palmdevs", isLarge = true)
+                    UserEntry("Gabriel.W.J.", "Developer", "Gabe-W-J")
                 }
 
                 Text(
@@ -197,8 +194,48 @@ class AboutScreen : Screen {
                 ) {
                     ElevatedCard {
                         ListItem(
+                            text = "Pylix",
+                            subtext = "Past developer of Bunny",
+                            imageUrl = "https://github.com/pylixonly.png",
+                            onClick = {
+                                uriHandler.openUri("https://github.com/pylixonly")
+                            }
+                        )
+                        ListItem(
+                            text = "Fiery",
+                            subtext = "Past developer of the iOS tweak",
+                            imageUrl = "https://github.com/FieryFlames.png",
+                            onClick = {
+                                uriHandler.openUri("https://github.com/FieryFlames")
+                            }
+                        )
+                        ListItem(
+                            text = "Maisy",
+                            subtext = "Past developer of Vendetta",
+                            imageUrl = "https://github.com/maisymoe.png",
+                            onClick = {
+                                uriHandler.openUri("https://github.com/maisymoe")
+                            }
+                        )
+                        ListItem(
+                            text = "Wing",
+                            subtext = "Past developer of Manager",
+                            imageUrl = "https://github.com/wingio.png",
+                            onClick = {
+                                uriHandler.openUri("https://github.com/wingio")
+                            }
+                        )
+                        ListItem(
+                            text = "Kasi",
+                            subtext = "Past developer of the Xposed Module",
+                            imageUrl = "https://github.com/redstonekasi.png",
+                            onClick = {
+                                uriHandler.openUri("https://github.com/redstonekasi")
+                            }
+                        )
+                        ListItem(
                             text = "rushii",
-                            subtext = "Installer, zip library, and a portion of patching",
+                            subtext = "Developer of the installer, zip library, and a portions of patching",
                             imageUrl = "https://github.com/rushiiMachine.png",
                             onClick = {
                                 uriHandler.openUri("https://github.com/rushiiMachine")
@@ -211,7 +248,7 @@ class AboutScreen : Screen {
                         )
                         ListItem(
                             text = "Xinto",
-                            subtext = "for the preference manager",
+                            subtext = "Developer of the preference manager",
                             imageUrl = "https://github.com/X1nto.png",
                             onClick = {
                                 uriHandler.openUri("https://github.com/X1nto")

@@ -5,8 +5,11 @@ import app.revenge.manager.BuildConfig
 
 object Constants {
     val TEAM_MEMBERS = listOf(
-        TeamMember("Pylix", "Developer - Bunny & Vendetta", "amsyarasyiq"),
-        TeamMember("Kasi", "Developer - Xposed Module", "redstonekasi")
+        TeamMember("Palm", "Lead developer", "palmdevs"),
+        TeamMember("oSumAtrIX", "Developer", "osumatrix"),
+        TeamMember("Gabriel.W.J.", "Developer", "Gabe-W-J"),
+        TeamMember("Nexpid", "Developer", "nexpid"),
+        TeamMember("Zaynedrift", "Developer", "zaynedrift"),
     )
 
     // NOTE: This is no longer used

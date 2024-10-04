@@ -32,7 +32,7 @@ class PreferenceManager(context: Context) :
 
     var mirror by enumPreference("mirror", Mirror.DEFAULT)
 
-    var monet by booleanPreference("monet", Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
+    var monet by booleanPreference("monet", false)
 
     var isDeveloper by booleanPreference("is_developer", false)
 

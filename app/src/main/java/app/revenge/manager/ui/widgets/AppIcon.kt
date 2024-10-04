@@ -21,9 +21,9 @@ fun AppIcon(
 ) {
     val iconColor = remember(customIcon, releaseChannel) {
         when {
-            customIcon -> Color(app.revenge.manager.BuildConfig.MODDED_APP_ICON)
-            releaseChannel == DiscordVersion.Type.ALPHA -> Color(app.revenge.manager.BuildConfig.MODDED_APP_ICON_ALPHA)
-            else -> Color(app.revenge.manager.BuildConfig.MODDED_APP_ICON_OTHER)
+            customIcon -> Color(BuildConfig.MODDED_APP_ICON)
+            releaseChannel == DiscordVersion.Type.ALPHA -> Color(BuildConfig.MODDED_APP_ICON_ALPHA)
+            else -> Color(BuildConfig.MODDED_APP_ICON_OTHER)
         }
     }
 
