@@ -1,10 +1,10 @@
-import org.gradle.internal.impldep.org.junit.experimental.categories.Categories.CategoryFilter.exclude
 import java.io.ByteArrayOutputStream
 
 plugins {
     alias(libs.plugins.aboutlibraries)
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlin.serialization)
     publishing
 }
