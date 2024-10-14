@@ -42,7 +42,7 @@ Application to use Revenge on Android.
 
 ## ❓ About
 
-Revenge Manager is an application that installs and updates [Revenge](https://github.com/revenge-mod/revenge),
+Revenge Manager is an application that installs and updates [Revenge](https://github.com/revenge-mod/revenge-bundle),
 a modification for Discord.
 
 ## 💪 Features

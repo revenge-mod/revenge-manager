@@ -23,7 +23,7 @@ android {
 
         buildConfigField("String", "MOD_NAME", "\"Revenge\"")
         buildConfigField("String", "MANAGER_NAME", "\"RevengeManager\"")
-        buildConfigField("String", "REPO", "\"revenge-mod/revenge\"")
+        buildConfigField("String", "REPO", "\"revenge-mod/bundle\"")
         buildConfigField("String", "ORG_LINK", "\"https://github.com/revenge-mod\"")
         buildConfigField("String", "INVITE_LINK", "\"https://discord.gg/ddcQf3s2Uq\"")
         buildConfigField("String", "MODDED_APP_PACKAGE_NAME", "\"app.revenge\"")
