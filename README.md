@@ -2,10 +2,10 @@
   <picture>
     <source
       media="(prefers-color-scheme: dark)"
-      srcset="assets/wordmark/wordmark+slogan-light.svg"
+      srcset="assets/wordmark/wordmark+slogan-dark.svg"
     >
-    <img 
-      src="assets/wordmark/wordmark+slogan-dark.svg"
+    <img
+      src="assets/wordmark/wordmark+slogan-light.svg"
     >
   </picture>
   <br>
