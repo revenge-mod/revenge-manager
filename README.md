@@ -1,10 +1,12 @@
 <p align="center">
   <picture>
     <source
+      width="512px"
       media="(prefers-color-scheme: dark)"
       srcset="assets/wordmark/wordmark+slogan-dark.svg"
     >
     <img
+      width="512px"
       src="assets/wordmark/wordmark+slogan-light.svg"
     >
   </picture>
