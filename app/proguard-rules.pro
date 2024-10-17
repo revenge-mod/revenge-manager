@@ -77,3 +77,5 @@
 # Can be removed once compose ui artifact is updated to 1.4.0
 # ref: https://issuetracker.google.com/issues/265188224?pli=1
 -keep,allowshrinking class * extends androidx.compose.ui.node.ModifierNodeElement {}
+
+-keep class cafe.adriel.voyager.** { *; }

@@ -1,23 +1,35 @@
-import org.gradle.internal.impldep.org.junit.experimental.categories.Categories.CategoryFilter.exclude
 import java.io.ByteArrayOutputStream
 
 plugins {
     alias(libs.plugins.aboutlibraries)
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlin.serialization)
+    publishing
 }
 
 android {
-    namespace = "dev.beefers.vendetta.manager"
+    namespace = "app.revenge.manager"
     compileSdk = 34
 
     defaultConfig {
         applicationId = "app.revenge.manager"
         minSdk = 28
         targetSdk = 34
-        versionCode = 1000
-        versionName = "1.0.0"
+        versionName = version.toString()
+        versionCode = versionName!!.split("-").first().replace(".", "").toInt()
+
+
+        buildConfigField("String", "MOD_NAME", "\"Revenge\"")
+        buildConfigField("String", "MANAGER_NAME", "\"RevengeManager\"")
+        buildConfigField("String", "REPO", "\"revenge-mod/bundle\"")
+        buildConfigField("String", "ORG_LINK", "\"https://github.com/revenge-mod\"")
+        buildConfigField("String", "INVITE_LINK", "\"https://discord.gg/ddcQf3s2Uq\"")
+        buildConfigField("String", "MODDED_APP_PACKAGE_NAME", "\"app.revenge\"")
+        buildConfigField("int", "MODDED_APP_ICON", "0xFEB23A42")
+        buildConfigField("int", "MODDED_APP_ICON_ALPHA", "0xFFFBB33C")
+        buildConfigField("int", "MODDED_APP_ICON_OTHER", "0xFFD3575E")
 
         buildConfigField("String", "GIT_BRANCH", "\"${getCurrentBranch()}\"")
         buildConfigField("String", "GIT_COMMIT", "\"${getLatestCommit()}\"")
@@ -31,7 +43,7 @@ android {
     }
 
     buildTypes {
-        named("release") {
+        release {
             isCrunchPngs = true
             isMinifyEnabled = true
             isShrinkResources = true
@@ -39,6 +51,16 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
             )
+
+            val keystoreFile = file("keystore.jks")
+            signingConfig = if (keystoreFile.exists()) {
+                 signingConfigs.create("release") {
+                    storeFile = keystoreFile
+                    storePassword = System.getenv("KEYSTORE_PASSWORD")
+                    keyAlias = System.getenv("KEYSTORE_ENTRY_ALIAS")
+                    keyPassword = System.getenv("KEYSTORE_ENTRY_PASSWORD")
+                }
+            } else signingConfigs["debug"]
         }
     }
 
@@ -63,6 +85,14 @@ android {
 
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.6"
+    }
+
+    applicationVariants.all {
+        outputs.all {
+            this as com.android.build.gradle.internal.api.ApkVariantOutputImpl
+
+            outputFileName = "${rootProject.name}-$version.apk"
+        }
     }
 
     androidComponents {
@@ -147,7 +177,7 @@ fun exec(vararg command: String): String? {
             isIgnoreExitValue = true
         }
 
-        if(errout.size() > 0)
+        if (errout.size() > 0)
             throw Error(errout.toString(Charsets.UTF_8))
 
         stdout.toString(Charsets.UTF_8).trim()
@@ -156,3 +186,10 @@ fun exec(vararg command: String): String? {
         null
     }
 }
+
+// Used by gradle-semantic-release-plugin.
+// Tracking: https://github.com/KengoTODA/gradle-semantic-release-plugin/issues/435.
+tasks.publish {
+    dependsOn("assembleRelease")
+}
+

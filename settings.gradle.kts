@@ -1,10 +1,11 @@
+rootProject.name = "revenge-manager"
+
 pluginManagement {
     repositories {
-        google()
-        mavenCentral()
         gradlePluginPortal()
+        mavenCentral()
+        google()
     }
 }
 
-rootProject.name = "Bunny Manager"
 include(":app")
