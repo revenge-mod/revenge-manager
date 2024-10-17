@@ -35,8 +35,8 @@
 
 # 💊 Revenge Manager
 
-![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/revenge-mod/revenvemanager/release.yml)
-![GPLv3 License](https://img.shields.io/badge/License-OSL%20v3-yellow.svg)
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/revenge-mod/revenge-manager/release.yml)
+![Open Software License 3](https://img.shields.io/badge/License-OSL%20v3-yellow.svg)
 
 Application to use Revenge on Android.
 
