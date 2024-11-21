@@ -33,7 +33,7 @@ fun LicenseBottomSheet(
 ) {
     ModalBottomSheet(
         onDismissRequest = onDismiss,
-        windowInsets = WindowInsets(0, 0, 0, 0)
+        contentWindowInsets = { WindowInsets(0, 0, 0, 0) }
     ) {
         Column(
             verticalArrangement = Arrangement.spacedBy(12.dp),

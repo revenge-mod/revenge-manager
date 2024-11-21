@@ -20,14 +20,14 @@ import androidx.core.net.toUri
 import dev.beefers.vendetta.manager.R
 import dev.beefers.vendetta.manager.domain.manager.PreferenceManager
 import dev.beefers.vendetta.manager.ui.components.settings.SettingsChoiceDialog
-import org.koin.androidx.compose.get
+import org.koin.compose.koinInject
 
 @Composable
 fun DownloadFailedDialog(
     onTryAgainClick: () -> Unit,
     onDismiss: () -> Unit
 ) {
-    val prefs: PreferenceManager = get()
+    val prefs: PreferenceManager = koinInject()
     var mirrorPickerOpened by remember {
         mutableStateOf(false)
     }

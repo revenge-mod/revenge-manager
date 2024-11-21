@@ -101,13 +101,13 @@ class StepRunner(
      * Whether or not the patching/installation process has completed.
      * Note that this does not mean all steps were finished successfully
      */
-    var completed by mutableStateOf<Boolean>(false)
+    var completed by mutableStateOf(false)
         private set
 
     /**
      * Whether or not a download step failed, this is only for errors related to network conditions and not cancellations
      */
-    var downloadErrored by mutableStateOf<Boolean>(false)
+    var downloadErrored by mutableStateOf(false)
 
     /**
      * List of steps to go through for this install

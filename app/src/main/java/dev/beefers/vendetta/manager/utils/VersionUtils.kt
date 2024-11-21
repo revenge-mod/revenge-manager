@@ -31,7 +31,7 @@ data class DiscordVersion(
             if (toInt() <= 126021) return@with null
             val codeReversed = toCharArray().reversed().joinToString("")
             val typeInt = codeReversed[2].toString().toInt()
-            val type = Type.values().getOrNull(typeInt) ?: return@with null
+            val type = Type.entries.getOrNull(typeInt) ?: return@with null
             DiscordVersion(
                 codeReversed.slice(3..codeReversed.lastIndex).reversed().toInt(),
                 codeReversed.substring(0, 2).reversed().toInt(),

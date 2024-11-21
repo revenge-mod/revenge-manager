@@ -17,14 +17,14 @@ import androidx.compose.ui.unit.dp
 import dev.beefers.vendetta.manager.R
 import dev.beefers.vendetta.manager.domain.manager.PreferenceManager
 import dev.beefers.vendetta.manager.utils.DiscordVersion
-import org.koin.androidx.compose.get
+import org.koin.compose.koinInject
 
 @Composable
 fun ThemePreview(
     colorScheme: ColorScheme,
     modifier: Modifier = Modifier
 ) {
-    val prefs: PreferenceManager = get()
+    val prefs: PreferenceManager = koinInject()
     val light = colorScheme.background.luminance() > 0.5f
     val layerModifier = Modifier.height(300.dp)
     val iconColor = remember(prefs.patchIcon, prefs.channel) {

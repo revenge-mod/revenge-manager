@@ -1,7 +1,6 @@
 package dev.beefers.vendetta.manager.installer.util
 
 import android.Manifest
-import android.os.Build
 import pxb.android.axml.AxmlReader
 import pxb.android.axml.AxmlVisitor
 import pxb.android.axml.AxmlWriter
