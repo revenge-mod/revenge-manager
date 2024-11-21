@@ -133,7 +133,7 @@ class AboutScreen : Screen {
                         LinkItem(
                             icon = R.drawable.ic_github,
                             label = R.string.label_github,
-                            link = "https://github.com/pyoncord"
+                            link = "https://github.com/bunny-mod"
                         )
 
                         LinkItem(
