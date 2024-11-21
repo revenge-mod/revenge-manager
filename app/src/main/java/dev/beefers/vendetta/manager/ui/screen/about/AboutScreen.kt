@@ -230,11 +230,11 @@ class AboutScreen : Screen {
                         //     text = stringResource(R.string.label_translate),
                         //     onClick = { uriHandler.openUri("https://crowdin.com/project/vendetta-manager") }
                         // )
-                        HorizontalDivider(
-                            modifier = Modifier.padding(horizontal = 16.dp),
-                            thickness = 0.5.dp,
-                            color = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f)
-                        )
+                        // HorizontalDivider(
+                        //     modifier = Modifier.padding(horizontal = 16.dp),
+                        //     thickness = 0.5.dp,
+                        //     color = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f)
+                        // )
                         ListItem(
                             text = stringResource(R.string.title_os_libraries),
                             onClick = { navigator.push(LibrariesScreen()) }
