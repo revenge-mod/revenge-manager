@@ -1,3 +1,10 @@
+## [1.0.1-dev.1](https://github.com/revenge-mod/revenge-manager/compare/v1.0.0...v1.0.1-dev.1) (2024-11-24)
+
+
+### Bug Fixes
+
+* Switch to JingMatrix/LSPatch to fix patching on Android 15 ([#10](https://github.com/revenge-mod/revenge-manager/issues/10)) ([343a91d](https://github.com/revenge-mod/revenge-manager/commit/343a91d83c3e394c3cd6e396de5d4a33a5ae3dbe))
+
 # 1.0.0 (2024-10-20)
 
 
