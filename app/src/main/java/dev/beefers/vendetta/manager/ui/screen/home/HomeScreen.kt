@@ -1,7 +1,6 @@
 package dev.beefers.vendetta.manager.ui.screen.home
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,9 +11,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.OpenInNew
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.filled.OpenInNew
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Button
@@ -37,7 +36,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.collectAsLazyPagingItems
 import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.koin.getScreenModel
+import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import dev.beefers.vendetta.manager.BuildConfig
@@ -54,19 +53,18 @@ import dev.beefers.vendetta.manager.ui.widgets.updater.UpdateDialog
 import dev.beefers.vendetta.manager.utils.Constants
 import dev.beefers.vendetta.manager.utils.DiscordVersion
 import dev.beefers.vendetta.manager.utils.navigate
-import org.koin.androidx.compose.get
+import org.koin.compose.koinInject
 
 class HomeScreen : Screen {
 
-    @OptIn(ExperimentalFoundationApi::class)
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-        val prefs: PreferenceManager = get()
-        val viewModel: HomeViewModel = getScreenModel()
+        val prefs: PreferenceManager = koinInject()
+        val viewModel: HomeViewModel = koinScreenModel()
 
         val currentVersion = remember {
-            DiscordVersion.fromVersionCode(viewModel.installManager.current?.versionCode.toString())
+            DiscordVersion.fromVersionCode(viewModel.installManager.current?.longVersionCode.toString())
         }
 
         val latestVersion =
@@ -180,7 +178,7 @@ class HomeScreen : Screen {
                         modifier = Modifier.clip(RoundedCornerShape(16.dp))
                     ) {
                         SegmentedButton(
-                            icon = Icons.Filled.OpenInNew,
+                            icon = Icons.AutoMirrored.Filled.OpenInNew,
                             text = stringResource(R.string.action_launch),
                             onClick = { viewModel.launchVendetta() }
                         )
@@ -220,7 +218,7 @@ class HomeScreen : Screen {
 
     @Composable
     private fun Actions() {
-        val viewModel: HomeViewModel = getScreenModel()
+        val viewModel: HomeViewModel = koinScreenModel()
         val navigator = LocalNavigator.currentOrThrow
 
         IconButton(onClick = { viewModel.getDiscordVersions() }) {

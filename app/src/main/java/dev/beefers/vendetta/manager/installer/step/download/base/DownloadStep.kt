@@ -16,8 +16,6 @@ import dev.beefers.vendetta.manager.installer.step.StepStatus
 import dev.beefers.vendetta.manager.utils.mainThread
 import dev.beefers.vendetta.manager.utils.showToast
 import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import org.koin.core.component.inject
 import java.io.File
 import kotlin.math.roundToInt

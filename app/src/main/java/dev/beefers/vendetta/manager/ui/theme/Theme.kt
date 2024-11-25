@@ -11,13 +11,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import dev.beefers.vendetta.manager.domain.manager.PreferenceManager
 import dev.beefers.vendetta.manager.domain.manager.Theme
-import org.koin.androidx.compose.get
+import org.koin.compose.koinInject
 
 @Composable
 fun VendettaManagerTheme(
     content: @Composable () -> Unit
 ) {
-    val prefs = get<PreferenceManager>()
+    val prefs = koinInject<PreferenceManager>()
     val dynamicColor = prefs.monet
     val darkTheme = when (prefs.theme) {
         Theme.SYSTEM -> isSystemInDarkTheme()

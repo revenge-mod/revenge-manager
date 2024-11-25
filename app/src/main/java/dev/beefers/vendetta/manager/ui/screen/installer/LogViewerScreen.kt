@@ -1,12 +1,7 @@
 package dev.beefers.vendetta.manager.ui.screen.installer
 
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
-import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.horizontalScroll
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.padding
@@ -14,7 +9,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.outlined.MoreVert
 import androidx.compose.material.icons.outlined.Save
@@ -41,7 +36,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.koin.getScreenModel
+import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import dev.beefers.vendetta.manager.R
@@ -52,7 +47,7 @@ import dev.beefers.vendetta.manager.ui.widgets.installer.LogLine
 import dev.beefers.vendetta.manager.utils.DimenUtils
 import dev.beefers.vendetta.manager.utils.rememberFileSaveLauncher
 import dev.beefers.vendetta.manager.utils.thenIf
-import org.koin.androidx.compose.get
+import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -62,9 +57,9 @@ class LogViewerScreen(
 
     @Composable
     override fun Content() {
-        val prefs: PreferenceManager = get()
+        val prefs: PreferenceManager = koinInject()
         val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
-        val viewModel: LogViewerViewModel = getScreenModel {
+        val viewModel: LogViewerViewModel = koinScreenModel {
             parametersOf(logs)
         }
 
@@ -109,7 +104,7 @@ class LogViewerScreen(
             navigationIcon = {
                 IconButton(onClick = { navigator.pop() }) {
                     Icon(
-                        imageVector = Icons.Filled.ArrowBack,
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = stringResource(R.string.action_back)
                     )
                 }
@@ -156,7 +151,7 @@ class LogViewerScreen(
         expanded: Boolean,
         onDismiss: () -> Unit
     ) {
-        val prefs: PreferenceManager = get()
+        val prefs: PreferenceManager = koinInject()
 
         Box {
             DropdownMenu(
