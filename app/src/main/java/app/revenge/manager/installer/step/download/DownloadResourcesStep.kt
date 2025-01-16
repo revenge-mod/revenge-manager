@@ -17,7 +17,7 @@ class DownloadResourcesStep(
 
     override val nameRes = R.string.step_dl_res
 
-    override val url: String = "$baseUrl/tracker/download/$version/config.xxhdpi"
+    override val url: String = "/tracker/download/$version/config.xxhdpi"
     override val destination = dir.resolve("config.xxhdpi-$version.apk")
     override val workingCopy = workingDir.resolve("config.xxhdpi-$version.apk")
 
