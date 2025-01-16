@@ -12,8 +12,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import app.revenge.manager.BuildConfig
-import cafe.adriel.voyager.core.model.ScreenModel
-import cafe.adriel.voyager.core.model.screenModelScope
+import app.revenge.manager.R
 import app.revenge.manager.domain.manager.DownloadManager
 import app.revenge.manager.domain.manager.InstallManager
 import app.revenge.manager.domain.manager.InstallMethod
@@ -22,12 +21,16 @@ import app.revenge.manager.domain.repository.RestRepository
 import app.revenge.manager.installer.Installer
 import app.revenge.manager.installer.session.SessionInstaller
 import app.revenge.manager.installer.shizuku.ShizukuInstaller
+import app.revenge.manager.installer.shizuku.ShizukuPermissions
 import app.revenge.manager.network.dto.Release
 import app.revenge.manager.network.utils.CommitsPagingSource
 import app.revenge.manager.network.utils.dataOrNull
 import app.revenge.manager.network.utils.ifSuccessful
 import app.revenge.manager.utils.DiscordVersion
 import app.revenge.manager.utils.isMiui
+import app.revenge.manager.utils.showToast
+import cafe.adriel.voyager.core.model.ScreenModel
+import cafe.adriel.voyager.core.model.screenModelScope
 import kotlinx.coroutines.launch
 import java.io.File
 
@@ -52,7 +55,9 @@ class HomeViewModel(
 
     var showUpdateDialog by mutableStateOf(false)
     var isUpdating by mutableStateOf(false)
-    val commits = Pager(PagingConfig(pageSize = 30)) { CommitsPagingSource(repo) }.flow.cachedIn(screenModelScope)
+    val commits = Pager(PagingConfig(pageSize = 30)) { CommitsPagingSource(repo) }.flow.cachedIn(
+        screenModelScope
+    )
 
     init {
         getDiscordVersions()
@@ -129,7 +134,15 @@ class HomeViewModel(
             downloadManager.downloadUpdate(update)
             isUpdating = false
 
-            val installer: Installer = when (prefs.installMethod) {
+            val installMethod = if (prefs.installMethod == InstallMethod.SHIZUKU && !ShizukuPermissions.waitShizukuPermissions()) {
+                // Temporarily use DEFAULT if SHIZUKU permissions are not granted
+                    InstallMethod.DEFAULT
+                } else {
+                    context.showToast(R.string.msg_shizuku_denied)
+                    prefs.installMethod
+                }
+
+            val installer: Installer = when (installMethod) {
                 InstallMethod.DEFAULT -> SessionInstaller(context)
                 InstallMethod.SHIZUKU -> ShizukuInstaller(context)
             }
