@@ -17,7 +17,7 @@
     <string name="msg_unlocked">You are now a developer</string>
     <string name="msg_permission_grant">File permissions are required to use shared storage.</string>
     <string name="msg_shizuku_denied">Failed to obtain Shizuku permissions</string>
-    <string name="msg_change_mirror">Would you like to try again using a download mirror?</string>
+    <string name="msg_try_again">Would you like to try again?</string>
     <string name="msg_invalid_apk">APK was corrupted, try clearing cache then reinstalling</string>
     <string name="msg_download_cancelled">Download was aborted</string>
     <string name="msg_download_failed">Download failed</string>
