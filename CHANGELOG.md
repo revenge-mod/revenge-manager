@@ -1,3 +1,10 @@
+# [1.1.0-dev.3](https://github.com/revenge-mod/revenge-manager/compare/v1.1.0-dev.2...v1.1.0-dev.3) (2025-01-16)
+
+
+### Features
+
+* Cleanup about page and remove previous team members ([39ee2c6](https://github.com/revenge-mod/revenge-manager/commit/39ee2c654c62b63045d918cf7ffddcee55f6614f))
+
 # [1.1.0-dev.2](https://github.com/revenge-mod/revenge-manager/compare/v1.1.0-dev.1...v1.1.0-dev.2) (2025-01-16)
 
 
