@@ -1,3 +1,10 @@
+# [1.1.0-dev.1](https://github.com/revenge-mod/revenge-manager/compare/v1.0.1-dev.1...v1.1.0-dev.1) (2025-01-16)
+
+
+### Features
+
+* Temporarily use DEFAULT if SHIZUKU permissions are not granted ([#15](https://github.com/revenge-mod/revenge-manager/issues/15)) ([f784bf6](https://github.com/revenge-mod/revenge-manager/commit/f784bf622d764c2c9e43d0ab20ef3b7c83de13c1))
+
 ## [1.0.1-dev.1](https://github.com/revenge-mod/revenge-manager/compare/v1.0.0...v1.0.1-dev.1) (2024-11-24)
 
 
