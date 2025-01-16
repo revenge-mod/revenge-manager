@@ -48,7 +48,8 @@ fun StepGroupCard(
         steps.all { it.status == StepStatus.QUEUED } -> StepStatus.QUEUED
         steps.all { it.status == StepStatus.SUCCESSFUL } -> StepStatus.SUCCESSFUL
         steps.any { it.status == StepStatus.ONGOING } -> StepStatus.ONGOING
-        else -> StepStatus.UNSUCCESSFUL
+        steps.any { it.status == StepStatus.UNSUCCESSFUL } -> StepStatus.UNSUCCESSFUL
+        else -> StepStatus.ONGOING
     }
 
     Column(
