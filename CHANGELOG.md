@@ -1,3 +1,15 @@
+# [1.1.0-dev.2](https://github.com/revenge-mod/revenge-manager/compare/v1.1.0-dev.1...v1.1.0-dev.2) (2025-01-16)
+
+
+### Bug Fixes
+
+* Display correct group status in between steps ([706a547](https://github.com/revenge-mod/revenge-manager/commit/706a547f65e9e72f13cf56a8e0102db6617b4b9a))
+
+
+### Features
+
+* Implement automatic mirror switching and fix handling of stalled downloads ([#14](https://github.com/revenge-mod/revenge-manager/issues/14)) ([9921793](https://github.com/revenge-mod/revenge-manager/commit/992179349641e96fc383650767b196557767ea22))
+
 # [1.1.0-dev.1](https://github.com/revenge-mod/revenge-manager/compare/v1.0.1-dev.1...v1.1.0-dev.1) (2025-01-16)
 
 
