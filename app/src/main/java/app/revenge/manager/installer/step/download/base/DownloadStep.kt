@@ -129,11 +129,9 @@ abstract class DownloadStep : Step() {
 
         // If the current mirror fails, try other mirrors
         if (!successfulDownload && isUsingMirror) {
-            for (mirror in Mirror.entries) {
-                if (mirror == preferenceManager.mirror) continue
-
+            for (mirror in Mirror.entries - preferenceManager.mirror) {
                 downloadUrl = mirror.baseUrl + url
-
+        
                 if (download(downloadUrl, destination, runner)) {
                     preferenceManager.mirror = mirror
                     successfulDownload = true
