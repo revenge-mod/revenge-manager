@@ -5,7 +5,6 @@ import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.core.net.toUri
 import app.revenge.manager.R
 import app.revenge.manager.domain.manager.DownloadManager
 import app.revenge.manager.domain.manager.DownloadResult
@@ -38,7 +37,12 @@ abstract class DownloadStep : Step() {
     /**
      * Url of the desired file to download
      */
-    abstract val url: String
+    open val downloadFullUrl: String? = null
+
+    /**
+     * Mirror url path of the desired file to download
+     */
+    open val downloadMirrorUrlPath: String? = null
 
     /**
      * Where to download the file to
@@ -118,19 +122,18 @@ abstract class DownloadStep : Step() {
 
         runner.logger.i("$fileName was not properly cached, downloading now")
 
-        val isUsingMirror = url.toUri().host == null
-        var downloadUrl = if (isUsingMirror) {
-            preferenceManager.mirror.baseUrl + url
+        var downloadUrl = if (downloadMirrorUrlPath != null) {
+            preferenceManager.mirror.baseUrl + downloadMirrorUrlPath
         } else {
-            url
+            downloadFullUrl
         }
 
-        var successfulDownload = download(downloadUrl, destination, runner)
+        var successfulDownload = download(downloadUrl!!, destination, runner)
 
         // If the current mirror fails, try other mirrors
-        if (!successfulDownload && isUsingMirror) {
+        if (!successfulDownload && downloadMirrorUrlPath != null) {
             for (mirror in Mirror.entries - preferenceManager.mirror) {
-                downloadUrl = mirror.baseUrl + url
+                downloadUrl = mirror.baseUrl + downloadMirrorUrlPath
         
                 if (download(downloadUrl, destination, runner)) {
                     preferenceManager.mirror = mirror
