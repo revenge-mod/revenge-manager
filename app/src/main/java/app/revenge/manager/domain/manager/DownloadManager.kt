@@ -63,6 +63,8 @@ class DownloadManager(
             .setAllowedOverRoaming(true)
             .let(downloadManager::enqueue)
 
+        var lastProgressTime = System.currentTimeMillis()
+
         // Repeatedly request download state until it is finished
         while (true) {
             try {
@@ -90,8 +92,16 @@ class DownloadManager(
 
             cursor.use {
                 when (status) {
-                    DownloadManager.STATUS_PENDING, DownloadManager.STATUS_PAUSED ->
+                    DownloadManager.STATUS_PENDING, DownloadManager.STATUS_PAUSED -> {
+                        val currentTime = System.currentTimeMillis()
+                        val elapsedTime = currentTime - lastProgressTime
+
+                        if (elapsedTime >= 5000L) {
+                            return DownloadResult.Error(debugReason = "Download timeout")
+                        }
+
                         onProgressUpdate(null)
+                    }
 
                     DownloadManager.STATUS_RUNNING ->
                         onProgressUpdate(getDownloadProgress(cursor))

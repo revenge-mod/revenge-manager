@@ -141,17 +141,16 @@ class AboutScreen : Screen {
                     }
                 }
 
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceEvenly,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 16.dp, bottom = 20.dp)
-                ) {
-                    UserEntry("oSumAtrIX", "Developer", "osumatrix")
-                    UserEntry("Palm", "Lead developer", "palmdevs", isLarge = true)
-                    UserEntry("Gabriel.W.J.", "Developer", "Gabe-W-J")
-                }
+//                Row(
+//                    verticalAlignment = Alignment.CenterVertically,
+//                    horizontalArrangement = Arrangement.SpaceEvenly,
+//                    modifier = Modifier
+//                        .fillMaxWidth()
+//                        .padding(top = 16.dp, bottom = 20.dp)
+//                ) {
+//                    UserEntry("oSumAtrIX", "Developer", "osumatrix", isLarge = true)
+//                    UserEntry("Palm", "Lead developer", "palmdevs", isLarge = true)
+//                }
 
                 Text(
                     text = stringResource(R.string.label_team),
@@ -241,11 +240,6 @@ class AboutScreen : Screen {
                                 uriHandler.openUri("https://github.com/rushiiMachine")
                             }
                         )
-                        Divider(
-                            thickness = 0.5.dp,
-                            color = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f),
-                            modifier = Modifier.padding(horizontal = 16.dp)
-                        )
                         ListItem(
                             text = "Xinto",
                             subtext = "Developer of the preference manager",
@@ -267,11 +261,11 @@ class AboutScreen : Screen {
                         //     text = stringResource(R.string.label_translate),
                         //     onClick = { uriHandler.openUri("https://crowdin.com/project/vendetta-manager") }
                         // )
-                        Divider(
-                            thickness = 0.5.dp,
-                            color = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f),
-                            modifier = Modifier.padding(horizontal = 16.dp)
-                        )
+//                        Divider(
+//                            thickness = 0.5.dp,
+//                            color = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f),
+//                            modifier = Modifier.padding(horizontal = 16.dp)
+//                        )
                         ListItem(
                             text = stringResource(R.string.title_os_libraries),
                             onClick = { navigator.push(LibrariesScreen()) }

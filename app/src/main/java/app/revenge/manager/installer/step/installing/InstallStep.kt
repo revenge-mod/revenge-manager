@@ -7,10 +7,12 @@ import app.revenge.manager.domain.manager.PreferenceManager
 import app.revenge.manager.installer.Installer
 import app.revenge.manager.installer.session.SessionInstaller
 import app.revenge.manager.installer.shizuku.ShizukuInstaller
+import app.revenge.manager.installer.shizuku.ShizukuPermissions
 import app.revenge.manager.installer.step.Step
 import app.revenge.manager.installer.step.StepGroup
 import app.revenge.manager.installer.step.StepRunner
 import app.revenge.manager.utils.isMiui
+import app.revenge.manager.utils.showToast
 import org.koin.core.component.inject
 import java.io.File
 
@@ -38,7 +40,15 @@ class InstallStep(
             ?.takeIf { it.isNotEmpty() }
             ?: throw Error("Missing APKs from LSPatch step; failure likely")
 
-        val installer: Installer = when (preferences.installMethod) {
+        val installMethod = if (preferences.installMethod == InstallMethod.SHIZUKU && !ShizukuPermissions.waitShizukuPermissions()) {
+            // Temporarily use DEFAULT if SHIZUKU permissions are not granted
+            context.showToast(R.string.msg_shizuku_denied)
+            InstallMethod.DEFAULT
+        } else {
+            preferences.installMethod
+        }
+
+        val installer: Installer = when (installMethod) {
             InstallMethod.DEFAULT -> SessionInstaller(context)
             InstallMethod.SHIZUKU -> ShizukuInstaller(context)
         }

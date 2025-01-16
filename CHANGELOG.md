@@ -1,3 +1,36 @@
+# [1.1.0-dev.3](https://github.com/revenge-mod/revenge-manager/compare/v1.1.0-dev.2...v1.1.0-dev.3) (2025-01-16)
+
+
+### Features
+
+* Cleanup about page and remove previous team members ([39ee2c6](https://github.com/revenge-mod/revenge-manager/commit/39ee2c654c62b63045d918cf7ffddcee55f6614f))
+
+# [1.1.0-dev.2](https://github.com/revenge-mod/revenge-manager/compare/v1.1.0-dev.1...v1.1.0-dev.2) (2025-01-16)
+
+
+### Bug Fixes
+
+* Display correct group status in between steps ([706a547](https://github.com/revenge-mod/revenge-manager/commit/706a547f65e9e72f13cf56a8e0102db6617b4b9a))
+
+
+### Features
+
+* Implement automatic mirror switching and fix handling of stalled downloads ([#14](https://github.com/revenge-mod/revenge-manager/issues/14)) ([9921793](https://github.com/revenge-mod/revenge-manager/commit/992179349641e96fc383650767b196557767ea22))
+
+# [1.1.0-dev.1](https://github.com/revenge-mod/revenge-manager/compare/v1.0.1-dev.1...v1.1.0-dev.1) (2025-01-16)
+
+
+### Features
+
+* Temporarily use DEFAULT if SHIZUKU permissions are not granted ([#15](https://github.com/revenge-mod/revenge-manager/issues/15)) ([f784bf6](https://github.com/revenge-mod/revenge-manager/commit/f784bf622d764c2c9e43d0ab20ef3b7c83de13c1))
+
+## [1.0.1-dev.1](https://github.com/revenge-mod/revenge-manager/compare/v1.0.0...v1.0.1-dev.1) (2024-11-24)
+
+
+### Bug Fixes
+
+* Switch to JingMatrix/LSPatch to fix patching on Android 15 ([#10](https://github.com/revenge-mod/revenge-manager/issues/10)) ([343a91d](https://github.com/revenge-mod/revenge-manager/commit/343a91d83c3e394c3cd6e396de5d4a33a5ae3dbe))
+
 # 1.0.0 (2024-10-20)
 
 
