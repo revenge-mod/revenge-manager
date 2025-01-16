@@ -42,9 +42,9 @@ class InstallStep(
 
         val installMethod = if (preferences.installMethod == InstallMethod.SHIZUKU && !ShizukuPermissions.waitShizukuPermissions()) {
             // Temporarily use DEFAULT if SHIZUKU permissions are not granted
+            context.showToast(R.string.msg_shizuku_denied)
             InstallMethod.DEFAULT
         } else {
-            context.showToast(R.string.msg_shizuku_denied)
             preferences.installMethod
         }
 
