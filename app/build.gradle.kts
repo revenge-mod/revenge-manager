@@ -18,7 +18,7 @@ android {
         minSdk = 28
         targetSdk = 34
         versionName = version.toString()
-        versionCode = versionName!!.removePrefix("v").split("-").first().replace(".", "").toInt()
+        versionCode = versionName!!.split("-").first().replace(".", "").toInt()
 
 
         buildConfigField("String", "MOD_NAME", "\"Revenge\"")
