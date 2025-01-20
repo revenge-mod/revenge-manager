@@ -112,11 +112,11 @@ class HomeViewModel(
 
     private fun checkForUpdate() {
         screenModelScope.launch {
-            release = repo.getLatestRelease("revenge/revenge-manager").dataOrNull
+            release = repo.getLatestRelease("revenge-mod/revenge-manager").dataOrNull
             release?.let {
                 showUpdateDialog = it.tagName.toInt() > BuildConfig.VERSION_CODE
             }
-            repo.getLatestRelease("revenge/revenge-xposed").ifSuccessful {
+            repo.getLatestRelease("revenge-mod/revenge-xposed").ifSuccessful {
                 if (prefs.moduleVersion != it.tagName) {
                     prefs.moduleVersion = it.tagName
                     val module = File(cacheDir, "xposed.apk")
