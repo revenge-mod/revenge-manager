@@ -114,7 +114,7 @@ class HomeViewModel(
         screenModelScope.launch {
             release = repo.getLatestRelease("revenge-mod/revenge-manager").dataOrNull
             release?.let {
-                showUpdateDialog = it.tagName.toInt() > BuildConfig.VERSION_CODE
+                showUpdateDialog = it.tagName.removePrefix("v").toInt() > BuildConfig.VERSION_CODE
             }
             repo.getLatestRelease("revenge-mod/revenge-xposed").ifSuccessful {
                 if (prefs.moduleVersion != it.tagName) {
