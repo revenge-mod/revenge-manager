@@ -1,3 +1,24 @@
+## [1.1.1-dev.3](https://github.com/revenge-mod/revenge-manager/compare/v1.1.1-dev.2...v1.1.1-dev.3) (2025-01-20)
+
+
+### Bug Fixes
+
+* Remove unnecessary prefix handling ([f226621](https://github.com/revenge-mod/revenge-manager/commit/f22662196d3be971d1c46853fdcb165d2158213a))
+
+## [1.1.1-dev.2](https://github.com/revenge-mod/revenge-manager/compare/v1.1.1-dev.1...v1.1.1-dev.2) (2025-01-20)
+
+
+### Bug Fixes
+
+* Correct version code parsing and update dialog comparison ([e6be2f5](https://github.com/revenge-mod/revenge-manager/commit/e6be2f501820ae9cc3663a4cfaf4ac7e125dcc01))
+
+## [1.1.1-dev.1](https://github.com/revenge-mod/revenge-manager/compare/v1.1.0...v1.1.1-dev.1) (2025-01-20)
+
+
+### Bug Fixes
+
+* Invalid updater URLs ([4d01c52](https://github.com/revenge-mod/revenge-manager/commit/4d01c52a21922dc0897cb76917139a9c1bc59e2f))
+
 # [1.1.0](https://github.com/revenge-mod/revenge-manager/compare/v1.0.0...v1.1.0) (2025-01-16)
 
 
