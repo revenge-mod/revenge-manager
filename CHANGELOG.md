@@ -1,3 +1,10 @@
+## [1.1.1-dev.3](https://github.com/revenge-mod/revenge-manager/compare/v1.1.1-dev.2...v1.1.1-dev.3) (2025-01-20)
+
+
+### Bug Fixes
+
+* Remove unnecessary prefix handling ([f226621](https://github.com/revenge-mod/revenge-manager/commit/f22662196d3be971d1c46853fdcb165d2158213a))
+
 ## [1.1.1-dev.2](https://github.com/revenge-mod/revenge-manager/compare/v1.1.1-dev.1...v1.1.1-dev.2) (2025-01-20)
 
 
