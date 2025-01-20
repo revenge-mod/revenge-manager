@@ -1,3 +1,10 @@
+## [1.1.1-dev.2](https://github.com/revenge-mod/revenge-manager/compare/v1.1.1-dev.1...v1.1.1-dev.2) (2025-01-20)
+
+
+### Bug Fixes
+
+* Correct version code parsing and update dialog comparison ([e6be2f5](https://github.com/revenge-mod/revenge-manager/commit/e6be2f501820ae9cc3663a4cfaf4ac7e125dcc01))
+
 ## [1.1.1-dev.1](https://github.com/revenge-mod/revenge-manager/compare/v1.1.0...v1.1.1-dev.1) (2025-01-20)
 
 
