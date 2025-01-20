@@ -1,3 +1,10 @@
+## [1.1.1-dev.1](https://github.com/revenge-mod/revenge-manager/compare/v1.1.0...v1.1.1-dev.1) (2025-01-20)
+
+
+### Bug Fixes
+
+* Invalid updater URLs ([4d01c52](https://github.com/revenge-mod/revenge-manager/commit/4d01c52a21922dc0897cb76917139a9c1bc59e2f))
+
 # [1.1.0](https://github.com/revenge-mod/revenge-manager/compare/v1.0.0...v1.1.0) (2025-01-16)
 
 
