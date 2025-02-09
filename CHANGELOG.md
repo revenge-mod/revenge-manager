@@ -1,3 +1,16 @@
+# [1.2.0-dev.1](https://github.com/revenge-mod/revenge-manager/compare/v1.1.1-dev.4...v1.2.0-dev.1) (2025-02-09)
+
+
+### Bug Fixes
+
+* App version comparison for updates ([b2a5122](https://github.com/revenge-mod/revenge-manager/commit/b2a51228b41d349e5b973557232624d2e1547895))
+* Parse update download URL from API response ([d9b6916](https://github.com/revenge-mod/revenge-manager/commit/d9b6916a52f72a3bd27fcfb0ca5787fdc084fdc3))
+
+
+### Features
+
+* Add progress tracking to update download ([75602c1](https://github.com/revenge-mod/revenge-manager/commit/75602c1b4a7e2dc41d6a944f9aab0a352d318baa))
+
 ## [1.1.1-dev.4](https://github.com/revenge-mod/revenge-manager/compare/v1.1.1-dev.3...v1.1.1-dev.4) (2025-02-05)
 
 
