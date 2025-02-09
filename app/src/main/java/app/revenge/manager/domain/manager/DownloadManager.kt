@@ -29,9 +29,9 @@ class DownloadManager(
             onProgressUpdate
         )
 
-    suspend fun downloadUpdate(url: String, out: File) {
-        download(url, out) { 
-             /* TODO: Update a progress bar in the update dialog */
+    suspend fun downloadUpdate(url: String, out: File, onProgressUpdate: (Float?) -> Unit) {
+        download(url, out) { progress ->
+            onProgressUpdate(progress)
         }
     }
 

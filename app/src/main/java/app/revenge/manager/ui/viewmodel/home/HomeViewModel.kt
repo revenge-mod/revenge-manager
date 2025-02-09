@@ -128,12 +128,12 @@ class HomeViewModel(
         }
     }
 
-    fun downloadAndInstallUpdate() {
+    fun downloadAndInstallUpdate(onProgressUpdate: (Float?) -> Unit) {
         screenModelScope.launch {
             val update = File(cacheDir, "update.apk")
             if (update.exists()) update.delete()
             isUpdating = true
-            downloadManager.downloadUpdate(updateDownloadUrl!!, update)
+            downloadManager.downloadUpdate(updateDownloadUrl!!, update, onProgressUpdate)
             isUpdating = false
 
             val installMethod = if (prefs.installMethod == InstallMethod.SHIZUKU && !ShizukuPermissions.waitShizukuPermissions()) {
