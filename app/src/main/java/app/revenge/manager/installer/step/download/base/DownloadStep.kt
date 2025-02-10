@@ -63,6 +63,8 @@ abstract class DownloadStep : Step() {
         val fileName = destination.name
         var lastProgress: Float? = null
 
+        runner.logger.i("Downloading $fileName from $downloadUrl")
+
         val result = downloadManager.download(downloadUrl, destination) { newProgress ->
             progress = newProgress
 
@@ -134,6 +136,7 @@ abstract class DownloadStep : Step() {
         if (!successfulDownload && downloadMirrorUrlPath != null) {
             for (mirror in Mirror.entries - preferenceManager.mirror) {
                 downloadUrl = mirror.baseUrl + downloadMirrorUrlPath
+                runner.logger.i("Trying mirror: ${mirror.name}")
         
                 if (download(downloadUrl, destination, runner)) {
                     preferenceManager.mirror = mirror
