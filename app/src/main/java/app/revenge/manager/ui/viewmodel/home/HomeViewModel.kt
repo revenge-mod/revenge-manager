@@ -53,6 +53,7 @@ class HomeViewModel(
     var release by mutableStateOf<Release?>(null)
         private set
 
+    private var updateDownloadUrl by mutableStateOf<String?>(null)
     var showUpdateDialog by mutableStateOf(false)
     var isUpdating by mutableStateOf(false)
     val commits = Pager(PagingConfig(pageSize = 30)) { CommitsPagingSource(repo) }.flow.cachedIn(
@@ -112,11 +113,12 @@ class HomeViewModel(
 
     private fun checkForUpdate() {
         screenModelScope.launch {
-            release = repo.getLatestRelease("revenge/revenge-manager").dataOrNull
+            release = repo.getLatestRelease("revenge-mod/revenge-manager").dataOrNull
             release?.let {
-                showUpdateDialog = it.tagName.toInt() > BuildConfig.VERSION_CODE
+                updateDownloadUrl = it.assets.firstOrNull { asset -> asset.name.endsWith(".apk") }?.browserDownloadUrl
+                showUpdateDialog = it.tagName.removePrefix("v") != BuildConfig.VERSION_NAME
             }
-            repo.getLatestRelease("revenge/revenge-xposed").ifSuccessful {
+            repo.getLatestRelease("revenge-mod/revenge-xposed").ifSuccessful {
                 if (prefs.moduleVersion != it.tagName) {
                     prefs.moduleVersion = it.tagName
                     val module = File(cacheDir, "xposed.apk")
@@ -126,12 +128,12 @@ class HomeViewModel(
         }
     }
 
-    fun downloadAndInstallUpdate() {
+    fun downloadAndInstallUpdate(onProgressUpdate: (Float?) -> Unit) {
         screenModelScope.launch {
             val update = File(cacheDir, "update.apk")
             if (update.exists()) update.delete()
             isUpdating = true
-            downloadManager.downloadUpdate(update)
+            downloadManager.downloadUpdate(updateDownloadUrl!!, update, onProgressUpdate)
             isUpdating = false
 
             val installMethod = if (prefs.installMethod == InstallMethod.SHIZUKU && !ShizukuPermissions.waitShizukuPermissions()) {

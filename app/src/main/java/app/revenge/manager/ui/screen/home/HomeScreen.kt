@@ -1,7 +1,6 @@
 package app.revenge.manager.ui.screen.home
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -28,7 +27,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -37,10 +39,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.collectAsLazyPagingItems
 import app.revenge.manager.BuildConfig
-import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.koin.getScreenModel
-import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.currentOrThrow
 import app.revenge.manager.R
 import app.revenge.manager.domain.manager.PreferenceManager
 import app.revenge.manager.ui.components.SegmentedButton
@@ -54,11 +52,14 @@ import app.revenge.manager.ui.widgets.updater.UpdateDialog
 import app.revenge.manager.utils.Constants
 import app.revenge.manager.utils.DiscordVersion
 import app.revenge.manager.utils.navigate
+import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.koin.getScreenModel
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import org.koin.androidx.compose.get
 
 class HomeScreen : Screen {
 
-    @OptIn(ExperimentalFoundationApi::class)
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
@@ -86,12 +87,15 @@ class HomeScreen : Screen {
             viewModel.release != null &&
             !BuildConfig.DEBUG
         ) {
+            var progress by remember { mutableStateOf<Float?>(null) }
+
             UpdateDialog(
                 release = viewModel.release!!,
                 isUpdating = viewModel.isUpdating,
+                progress = progress,
                 onDismiss = { viewModel.showUpdateDialog = false },
                 onConfirm = {
-                    viewModel.downloadAndInstallUpdate()
+                    viewModel.downloadAndInstallUpdate { newProgress -> progress = newProgress }
                 }
             )
         }
