@@ -55,10 +55,10 @@ class PreferenceManager(context: Context) :
     var allowDowngrade by booleanPreference("allow_downgrade", false)
 
     init {
-        // Will be removed next update
-        if(mirror == Mirror.VENDETTA_ROCKS) mirror = Mirror.VENDETTA_ROCKS_ALT
+        if (mirror !in Mirror.entries) {
+            mirror = Mirror.DEFAULT
+        }
     }
-
 }
 
 enum class Theme(@StringRes val labelRes: Int) {
@@ -80,10 +80,8 @@ enum class UpdateCheckerDuration(@StringRes val labelRes: Int, val time: Long, v
 
 enum class Mirror(val baseUrl: String) {
     DEFAULT("https://tracker.vendetta.rocks"),
-    VENDETTA_ROCKS("https://proxy.vendetta.rocks"), // Temporarily added for compatibility
-    VENDETTA_ROCKS_ALT("https://proxy.vendetta.rocks"),
-    K6("https://vd.k6.tf"),
-    NEXPID("https://tracker.vd.nexpid.xyz")
+    NEXPID("https://tracker.vd.nexpid.xyz"),
+    USHIE("https://proxy.vd.ushie.dev")
 }
 
 enum class InstallMethod(@StringRes val labelRes: Int) {
