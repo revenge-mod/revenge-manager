@@ -1,3 +1,10 @@
+# [1.2.0-dev.2](https://github.com/revenge-mod/revenge-manager/compare/v1.2.0-dev.1...v1.2.0-dev.2) (2025-03-04)
+
+
+### Features
+
+* Update mirror list, and fallback to default on invalid selection ([bb31a90](https://github.com/revenge-mod/revenge-manager/commit/bb31a90c714eff84e163ca336d9ee23eea80252c))
+
 # [1.2.0-dev.1](https://github.com/revenge-mod/revenge-manager/compare/v1.1.1-dev.4...v1.2.0-dev.1) (2025-02-09)
 
 
