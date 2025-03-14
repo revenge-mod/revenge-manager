@@ -53,7 +53,7 @@ class PatchManifestsStep : Step() {
                 runner.logger.i("Deleting old AndroidManifest.xml in ${apk.name}")
                 zip.deleteEntry(
                     "AndroidManifest.xml",
-                    apk == libsApk
+                    /* fillVoid = */ apk == libsApk || apk == baseApk
                 ) // Preserve alignment in libs apk
 
                 runner.logger.i("Adding patched AndroidManifest.xml in ${apk.name}")
