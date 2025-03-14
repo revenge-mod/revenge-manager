@@ -9,7 +9,6 @@ import androidx.core.app.NotificationCompat
 import dev.beefers.vendetta.manager.BuildConfig
 import dev.beefers.vendetta.manager.R
 import dev.beefers.vendetta.manager.utils.Channels
-import dev.beefers.vendetta.manager.utils.Constants
 import dev.beefers.vendetta.manager.utils.DiscordVersion
 import dev.beefers.vendetta.manager.utils.Intents
 

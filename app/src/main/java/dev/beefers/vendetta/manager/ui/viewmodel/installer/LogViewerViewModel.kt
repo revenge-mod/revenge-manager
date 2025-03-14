@@ -62,7 +62,7 @@ class LogViewerViewModel(
             .setStream(uri)
             .apply {
                 intent.apply {
-                    addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                 }
             }
             .startChooser()

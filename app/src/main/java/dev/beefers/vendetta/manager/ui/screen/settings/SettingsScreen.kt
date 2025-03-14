@@ -1,16 +1,12 @@
 package dev.beefers.vendetta.manager.ui.screen.settings
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.outlined.AutoAwesome
 import androidx.compose.material.icons.outlined.Code
 import androidx.compose.material.icons.outlined.Info
@@ -34,18 +30,17 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import dev.beefers.vendetta.manager.BuildConfig
 import dev.beefers.vendetta.manager.R
 import dev.beefers.vendetta.manager.domain.manager.PreferenceManager
-import dev.beefers.vendetta.manager.ui.components.NavBarSpacer
 import dev.beefers.vendetta.manager.ui.components.settings.SettingsCategory
 import dev.beefers.vendetta.manager.ui.screen.about.AboutScreen
 import dev.beefers.vendetta.manager.utils.DimenUtils
-import org.koin.androidx.compose.get
+import org.koin.compose.koinInject
 
 class SettingsScreen : Screen {
 
     @Composable
     @OptIn(ExperimentalMaterial3Api::class)
     override fun Content() {
-        val preferences: PreferenceManager = get()
+        val preferences: PreferenceManager = koinInject()
         val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
 
         Scaffold(
@@ -123,7 +118,7 @@ class SettingsScreen : Screen {
             navigationIcon = {
                 IconButton(onClick = { navigator.pop() }) {
                     Icon(
-                        imageVector = Icons.Filled.ArrowBack,
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = stringResource(R.string.action_back)
                     )
                 }

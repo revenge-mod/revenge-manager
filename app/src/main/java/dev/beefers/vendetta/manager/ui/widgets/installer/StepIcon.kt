@@ -9,6 +9,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ProgressIndicatorDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -19,7 +20,6 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Dp
 import dev.beefers.vendetta.manager.R
 import dev.beefers.vendetta.manager.installer.step.StepStatus
-import dev.beefers.vendetta.manager.ui.viewmodel.installer.InstallerViewModel
 import kotlin.math.floor
 import kotlin.math.roundToInt
 
@@ -47,13 +47,14 @@ fun StepIcon(
         StepStatus.ONGOING -> {
             if(progress != null) {
                 CircularProgressIndicator(
-                    progress = progress,
-                    strokeWidth = strokeWidth,
+                    progress = { progress },
                     modifier = Modifier
                         .size(size)
                         .semantics {
                             contentDescription = "${(progress * 100).roundToInt()}%"
-                        }
+                        },
+                    strokeWidth = strokeWidth,
+                    trackColor = ProgressIndicatorDefaults.circularIndeterminateTrackColor,
                 )
             } else {
                 CircularProgressIndicator(

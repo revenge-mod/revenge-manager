@@ -1,5 +1,5 @@
 // https://github.com/Aliucord/Manager/blob/main/app/src/main/kotlin/com/aliucord/manager/installer/util/AxmlUtil.kt
-package dev.beefers.vendetta.manager.installer.utils
+package dev.beefers.vendetta.manager.installer.util
 
 import dev.beefers.vendetta.manager.utils.find
 import com.github.diamondminer88.zip.ZipReader

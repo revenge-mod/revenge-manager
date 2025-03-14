@@ -1,26 +1,21 @@
 package dev.beefers.vendetta.manager.installer.step.patching
 
-import android.os.Build
 import android.content.Context
 import androidx.compose.ui.graphics.Color
 import com.github.diamondminer88.zip.ZipWriter
-import com.google.devrel.gmscore.tools.apk.arsc.BinaryResourceIdentifier
-import com.google.devrel.gmscore.tools.apk.arsc.BinaryResourceValue
 import dev.beefers.vendetta.manager.R
 import dev.beefers.vendetta.manager.domain.manager.PreferenceManager
 import dev.beefers.vendetta.manager.installer.step.Step
 import dev.beefers.vendetta.manager.installer.step.StepGroup
 import dev.beefers.vendetta.manager.installer.step.StepRunner
 import dev.beefers.vendetta.manager.installer.step.download.DownloadBaseStep
-import dev.beefers.vendetta.manager.installer.utils.ArscUtil
-import dev.beefers.vendetta.manager.installer.utils.ArscUtil.addColorResource
-import dev.beefers.vendetta.manager.installer.utils.ArscUtil.addResource
-import dev.beefers.vendetta.manager.installer.utils.ArscUtil.getMainArscChunk
-import dev.beefers.vendetta.manager.installer.utils.ArscUtil.getPackageChunk
-import dev.beefers.vendetta.manager.installer.utils.ArscUtil.getResourceFileName
-import dev.beefers.vendetta.manager.installer.utils.AxmlUtil
+import dev.beefers.vendetta.manager.installer.util.ArscUtil
+import dev.beefers.vendetta.manager.installer.util.ArscUtil.addColorResource
+import dev.beefers.vendetta.manager.installer.util.ArscUtil.getMainArscChunk
+import dev.beefers.vendetta.manager.installer.util.ArscUtil.getPackageChunk
+import dev.beefers.vendetta.manager.installer.util.ArscUtil.getResourceFileName
+import dev.beefers.vendetta.manager.installer.util.AxmlUtil
 import dev.beefers.vendetta.manager.utils.DiscordVersion
-import dev.beefers.vendetta.manager.utils.getResBytes
 import org.koin.core.component.inject
 
 /**

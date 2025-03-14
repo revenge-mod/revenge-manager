@@ -1,5 +1,5 @@
 // https://github.com/Aliucord/Manager/blob/main/app/src/main/kotlin/com/aliucord/manager/installer/util/ArscUtil.kt
-package dev.beefers.vendetta.manager.installer.utils
+package dev.beefers.vendetta.manager.installer.util
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
