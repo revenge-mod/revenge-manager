@@ -16,8 +16,8 @@ android {
         applicationId = "io.github.pyoncord.manager"
         minSdk = 28
         targetSdk = 34
-        versionCode = 1006
-        versionName = "1.0.6"
+        versionCode = 1007
+        versionName = "1.0.7"
 
         buildConfigField("String", "GIT_BRANCH", "\"${getCurrentBranch()}\"")
         buildConfigField("String", "GIT_COMMIT", "\"${getLatestCommit()}\"")
