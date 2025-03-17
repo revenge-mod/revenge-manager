@@ -1,3 +1,10 @@
+# [1.2.0-dev.3](https://github.com/revenge-mod/revenge-manager/compare/v1.2.0-dev.2...v1.2.0-dev.3) (2025-03-17)
+
+
+### Bug Fixes
+
+* `fillVoid` when replacing AndroidManifest.xml in base apk ([c623d1d](https://github.com/revenge-mod/revenge-manager/commit/c623d1d174b922e27c1b9d90d95ceff95a48bb3f))
+
 # [1.2.0-dev.2](https://github.com/revenge-mod/revenge-manager/compare/v1.2.0-dev.1...v1.2.0-dev.2) (2025-03-04)
 
 
