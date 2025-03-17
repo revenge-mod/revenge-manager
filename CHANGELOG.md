@@ -1,3 +1,65 @@
+# [1.2.0-dev.4](https://github.com/revenge-mod/revenge-manager/compare/v1.2.0-dev.3...v1.2.0-dev.4) (2025-03-17)
+
+
+### Bug Fixes
+
+* Don't cache canceled partial downloads ([b0a637d](https://github.com/revenge-mod/revenge-manager/commit/b0a637d7f6987fa4549ebcd2df67b603ce0b2641)), closes [#21](https://github.com/revenge-mod/revenge-manager/issues/21)
+
+# [1.2.0-dev.3](https://github.com/revenge-mod/revenge-manager/compare/v1.2.0-dev.2...v1.2.0-dev.3) (2025-03-17)
+
+
+### Bug Fixes
+
+* `fillVoid` when replacing AndroidManifest.xml in base apk ([c623d1d](https://github.com/revenge-mod/revenge-manager/commit/c623d1d174b922e27c1b9d90d95ceff95a48bb3f))
+
+# [1.2.0-dev.2](https://github.com/revenge-mod/revenge-manager/compare/v1.2.0-dev.1...v1.2.0-dev.2) (2025-03-04)
+
+
+### Features
+
+* Update mirror list, and fallback to default on invalid selection ([bb31a90](https://github.com/revenge-mod/revenge-manager/commit/bb31a90c714eff84e163ca336d9ee23eea80252c))
+
+# [1.2.0-dev.1](https://github.com/revenge-mod/revenge-manager/compare/v1.1.1-dev.4...v1.2.0-dev.1) (2025-02-09)
+
+
+### Bug Fixes
+
+* App version comparison for updates ([b2a5122](https://github.com/revenge-mod/revenge-manager/commit/b2a51228b41d349e5b973557232624d2e1547895))
+* Parse update download URL from API response ([d9b6916](https://github.com/revenge-mod/revenge-manager/commit/d9b6916a52f72a3bd27fcfb0ca5787fdc084fdc3))
+
+
+### Features
+
+* Add progress tracking to update download ([75602c1](https://github.com/revenge-mod/revenge-manager/commit/75602c1b4a7e2dc41d6a944f9aab0a352d318baa))
+
+## [1.1.1-dev.4](https://github.com/revenge-mod/revenge-manager/compare/v1.1.1-dev.3...v1.1.1-dev.4) (2025-02-05)
+
+
+### Bug Fixes
+
+* Don't remove "unnecessary" prefix handling ([7266bf5](https://github.com/revenge-mod/revenge-manager/commit/7266bf5b7e5c7d642a7d79fc1f8ebc111b34d8cc))
+
+## [1.1.1-dev.3](https://github.com/revenge-mod/revenge-manager/compare/v1.1.1-dev.2...v1.1.1-dev.3) (2025-01-20)
+
+
+### Bug Fixes
+
+* Remove unnecessary prefix handling ([f226621](https://github.com/revenge-mod/revenge-manager/commit/f22662196d3be971d1c46853fdcb165d2158213a))
+
+## [1.1.1-dev.2](https://github.com/revenge-mod/revenge-manager/compare/v1.1.1-dev.1...v1.1.1-dev.2) (2025-01-20)
+
+
+### Bug Fixes
+
+* Correct version code parsing and update dialog comparison ([e6be2f5](https://github.com/revenge-mod/revenge-manager/commit/e6be2f501820ae9cc3663a4cfaf4ac7e125dcc01))
+
+## [1.1.1-dev.1](https://github.com/revenge-mod/revenge-manager/compare/v1.1.0...v1.1.1-dev.1) (2025-01-20)
+
+
+### Bug Fixes
+
+* Invalid updater URLs ([4d01c52](https://github.com/revenge-mod/revenge-manager/commit/4d01c52a21922dc0897cb76917139a9c1bc59e2f))
+
 # [1.1.0](https://github.com/revenge-mod/revenge-manager/compare/v1.0.0...v1.1.0) (2025-01-16)
 
 

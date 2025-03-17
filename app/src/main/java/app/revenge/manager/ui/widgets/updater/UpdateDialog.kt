@@ -25,6 +25,7 @@ import app.revenge.manager.network.dto.Release
 fun UpdateDialog(
     release: Release,
     isUpdating: Boolean,
+    progress: Float?,
     onDismiss: () -> Unit,
     onConfirm: () -> Unit
 ) {
@@ -47,12 +48,22 @@ fun UpdateDialog(
                         color = if (isUpdating) Color.Transparent else LocalContentColor.current
                     )
                     if (isUpdating) {
-                        CircularProgressIndicator(
-                            strokeWidth = 3.dp,
-                            modifier = Modifier
-                                .size(24.dp)
-                                .align(Alignment.Center)
-                        )
+                        if (progress != null) {
+                            CircularProgressIndicator(
+                                progress = { progress },
+                                modifier = Modifier
+                                    .size(24.dp)
+                                    .align(Alignment.Center),
+                                strokeWidth = 3.dp
+                            )
+                        } else {
+                            CircularProgressIndicator(
+                                modifier = Modifier
+                                    .size(24.dp)
+                                    .align(Alignment.Center),
+                                strokeWidth = 3.dp
+                            )
+                        }
                     }
                 }
 

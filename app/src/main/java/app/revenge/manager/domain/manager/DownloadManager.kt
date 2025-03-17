@@ -29,13 +29,11 @@ class DownloadManager(
             onProgressUpdate
         )
 
-    suspend fun downloadUpdate(out: File) =
-        download(
-            "https://github.com/revenge-mod/revenge-manager/releases/latest/download/Manager.apk",
-            out
-        ) {
-            /* TODO: Update a progress bar in the update dialog */
+    suspend fun downloadUpdate(url: String, out: File, onProgressUpdate: (Float?) -> Unit) {
+        download(url, out) { progress ->
+            onProgressUpdate(progress)
         }
+    }
 
     /**
      * Start a cancellable download with the system [DownloadManager].
@@ -63,7 +61,7 @@ class DownloadManager(
             .setAllowedOverRoaming(true)
             .let(downloadManager::enqueue)
 
-        var lastProgressTime = System.currentTimeMillis()
+        val lastProgressTime = System.currentTimeMillis()
 
         // Repeatedly request download state until it is finished
         while (true) {

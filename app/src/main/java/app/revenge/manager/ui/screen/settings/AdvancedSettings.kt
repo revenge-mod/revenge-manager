@@ -71,7 +71,6 @@ class AdvancedSettings: Screen {
                 SettingsItemChoice(
                     label = stringResource(R.string.settings_mirror),
                     pref = prefs.mirror,
-                    excludedOptions = listOf(Mirror.VENDETTA_ROCKS),
                     labelFactory = {
                         it.baseUrl.toUri().authority ?: it.baseUrl
                     },
