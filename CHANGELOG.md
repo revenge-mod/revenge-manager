@@ -1,3 +1,10 @@
+# [1.2.0-dev.4](https://github.com/revenge-mod/revenge-manager/compare/v1.2.0-dev.3...v1.2.0-dev.4) (2025-03-17)
+
+
+### Bug Fixes
+
+* Don't cache canceled partial downloads ([b0a637d](https://github.com/revenge-mod/revenge-manager/commit/b0a637d7f6987fa4549ebcd2df67b603ce0b2641)), closes [#21](https://github.com/revenge-mod/revenge-manager/issues/21)
+
 # [1.2.0-dev.3](https://github.com/revenge-mod/revenge-manager/compare/v1.2.0-dev.2...v1.2.0-dev.3) (2025-03-17)
 
 
