@@ -86,6 +86,9 @@ abstract class DownloadStep : Step() {
 
             is DownloadResult.Cancelled -> {
                 status = StepStatus.UNSUCCESSFUL
+                if (destination.delete()) {
+                    runner.logger.i("$fileName deleted from cache due to cancellation")
+                }
                 throw CancellationException("$fileName download cancelled")
             }
         }
