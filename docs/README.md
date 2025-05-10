@@ -12,7 +12,7 @@ This documentation explains how to use [Revenge Manager](https://github.com/reve
        *  ✨ Customising Revenge Discord app
        *  ☰ Change update frequency, installation methods and assets mirror
        *  ℹ️ About
-4.  [📜 Release notes](/CHANGELOG.md.md)
+4.  [📜 Release notes](/CHANGELOG.md)
 
 ## ⏭️ Start here
 
