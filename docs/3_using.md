@@ -57,5 +57,5 @@ Revenge Manager possible.
 
 ## ⏭️ The end
 
-In the mean time you can read the [📜 Release notes](/CHANGELOG.md.md) for 
+In the mean time you can read the [📜 Release notes](/CHANGELOG.md) for 
 Revenge Manager
