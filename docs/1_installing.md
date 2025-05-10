@@ -12,4 +12,4 @@ follow the step on the screen to install then open it.
 
 ## ⏭️ Next
 
-[🚀 Getting started with Revenge Manager](2_gettings_started.md)
+[🚀 Getting started with Revenge Manager](2_getting_started.md)
