@@ -2,10 +2,14 @@
 
 ## Hardware requirements
 
-To use %app, you must have Android %min_sdk or later.
+To use Revenge Manager, you must have Android 9 (Pie) or later and 
+at least around 500 MB of available storage is preferred.
 
-## ⏭️ Start here
+## Install the Revenge Manager app
 
-The next page will tell you about the prerequisites for using Revenge Manager.
+To install Revenge Manager, download the app from [GitHub](https://github.com/revenge-mod/revenge-manager/releases/latest),
+follow the step on the screen to install then open it.
 
-Continue: [💼 Prerequisites](0_prerequisites.md)
+## ⏭️ Next
+
+[🚀 Getting started with Revenge Manager](2_gettings_started.md)
