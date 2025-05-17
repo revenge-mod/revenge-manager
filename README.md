@@ -1,3 +1,10 @@
+> [!IMPORTANT]
+> ## Project Archival
+> 
+> **This project is no longer actively maintained and this repository has been archived.**
+>
+> We want to thank all contributors and users for their support over the project's lifetime. While development has ceased, the code remains available for those who may find it useful.
+
 <div align="center">
 
   <img src="images/bunny_logo.png" alt="Bunny logo" width="200px" style="border-radius: 50%" />
