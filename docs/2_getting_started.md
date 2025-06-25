@@ -20,7 +20,7 @@ instruction on the screen.
 > an instruction on the screen, you may need to go to app properties of 
 > Revenge Manager, find install unknown app option and allow it.
 
-Should you discovered any issue with the installation, clear cache and try again. 
+Should you discover any issue with the installation, clear the cache and try again. 
 If that doesn't work, file an issue at the Revenge Manager's [repository](https://github.com/revenge-mod/revenge-manager/issues/new?template=bug_report.yml).
 
 ## ⭮ Refresh or ⚙️ configure the Revenge Manager

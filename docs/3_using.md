@@ -20,12 +20,12 @@ There you have the option to switch between light and dark mode, and
 
 Here you can change the app name of Revenge Discord, by default it's set to 
 *Revenge*, replace the regular Discord icon with Revenge's own icon, and set 
-release channel which sorted by (first) most stable to (last) least stable.
+release channels, which are sorted from the most stable to the least stable.
 
 Once you're set all, go to Home page and reinstall the app.
 
 > [!NOTE]
-> When you switching from higher release channel, to lower release channel,
+> When switching from higher release channel, to lower release channel,
 > you need to wait for that channel to have a higher version than your 
 > currently installed version.
 > 
