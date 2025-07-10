@@ -32,11 +32,23 @@ data class DiscordVersion(
             val codeReversed = toCharArray().reversed().joinToString("")
             val typeInt = codeReversed[2].toString().toInt()
             val type = Type.values().getOrNull(typeInt) ?: return@with null
-            DiscordVersion(
-                codeReversed.slice(3..codeReversed.lastIndex).reversed().toInt(),
-                codeReversed.substring(0, 2).reversed().toInt(),
-                type
-            )
+            // maintain version below 287
+            System.out.println("VERSIONNN" + toInt())
+            if (287 < toInt() / 1000)
+                when (typeInt) {
+                    0 -> fromVersionCode("287013") //latest stable version
+                    1 -> fromVersionCode("286109") //latest beta version
+                    2 -> fromVersionCode("287203") //latest alpha version
+                    else -> {
+                        fromVersionCode(string)
+                    }
+                }
+            else
+                DiscordVersion(
+                    codeReversed.slice(3..codeReversed.lastIndex).reversed().toInt(),
+                    codeReversed.substring(0, 2).reversed().toInt(),
+                    type
+                )
         }
 
     }
