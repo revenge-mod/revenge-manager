@@ -45,16 +45,17 @@ class ReplaceIconStep : Step() {
 
         val backgroundColor = arsc.getPackageChunk().addColorResource("brand", Color(BuildConfig.MODDED_APP_ICON))
 
-        val postfix = when (preferences.channel) {
+        /*val postfix = when (preferences.channel) {
             DiscordVersion.Type.BETA -> "beta"
             DiscordVersion.Type.ALPHA -> "canary"
             else -> null
-        }
+        }*/
         
         for (rscFile in setOf(squareIconFile, roundIconFile)) { // setOf to not possibly patch same file twice
-            val referencePath = if (postfix == null) rscFile else {
+            /*val referencePath = if (postfix == null) rscFile else {
                 rscFile.replace("_$postfix.xml", ".xml")
-            }
+            }*/
+            val referencePath = rscFile
 
             runner.logger.i("Patching adaptive icon ($rscFile <- $referencePath)")
 
