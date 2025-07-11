@@ -36,7 +36,7 @@ class CustomizationSettings: Screen {
     @Composable
     @OptIn(ExperimentalMaterial3Api::class)
     override fun Content() {
-        val ctx = LocalContext.current
+        //val ctx = LocalContext.current
         val prefs: PreferenceManager = get()
         val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
 
@@ -68,7 +68,7 @@ class CustomizationSettings: Screen {
                     }
                 )
 
-                SettingsItemChoice(
+                /*SettingsItemChoice(
                     label = stringResource(R.string.settings_channel),
                     pref = prefs.channel,
                     labelFactory = {
@@ -77,7 +77,7 @@ class CustomizationSettings: Screen {
                     onPrefChange = {
                         prefs.channel = it
                     }
-                )
+                )*/
             }
         }
     }
