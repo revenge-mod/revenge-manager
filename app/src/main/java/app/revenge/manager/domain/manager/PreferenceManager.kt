@@ -40,7 +40,8 @@ class PreferenceManager(context: Context) :
 
     var theme by enumPreference("theme", Theme.SYSTEM)
 
-    var channel by enumPreference("channel", DiscordVersion.Type.STABLE)
+    //var channel by enumPreference("channel", DiscordVersion.Type.STABLE)
+    var channel = DiscordVersion.Type.STABLE
 
     var updateDuration by enumPreference("update_duration", UpdateCheckerDuration.HOURLY)
 
