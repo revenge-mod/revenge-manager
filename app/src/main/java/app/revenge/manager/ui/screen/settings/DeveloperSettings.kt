@@ -56,8 +56,8 @@ class DeveloperSettings : Screen {
         val supportingText = when {
             versionError -> stringResource(R.string.msg_invalid_version)
             version.isNotBlank() -> (DiscordVersion.fromVersionCode(version)?.toString() ?: run {
-                version = DiscordVersion.LATEST
-                DiscordVersion.fromVersionCode(DiscordVersion.LATEST).toString()
+                version = DiscordVersion.LATEST.code
+                DiscordVersion.LATEST.label
             })
             else -> null
         }

@@ -74,7 +74,7 @@ class HomeScreen : Screen {
             remember(prefs.discordVersion, viewModel.discordVersions, prefs.channel) {
                 when {
                     prefs.discordVersion.isBlank() -> viewModel.discordVersions?.get(prefs.channel)
-                    else -> (DiscordVersion.fromVersionCode(prefs.discordVersion) ?: DiscordVersion.fromVersionCode(DiscordVersion.LATEST))
+                    else -> (DiscordVersion.fromVersionCode(prefs.discordVersion) ?: DiscordVersion.fromVersionCode(DiscordVersion.LATEST.code))
                 }
             }
 

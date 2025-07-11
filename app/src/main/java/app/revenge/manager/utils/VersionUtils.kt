@@ -25,7 +25,8 @@ data class DiscordVersion(
     fun toVersionCode() = "$major${type.ordinal}${if (minor < 10) 0 else ""}${minor}"
 
     companion object {
-        const val LATEST = "287013"
+        data class LatestInfo(val code: String, val label: String)
+        val LATEST = LatestInfo("287013", "287.13 - Stable")
 
         fun fromVersionCode(string: String): DiscordVersion? = with(string) {
             if (length < 4) return@with null
@@ -38,7 +39,7 @@ data class DiscordVersion(
             if (type != Type.STABLE) return@with null
             // maintain version below 288
             if (287 < toInt() / 1000)
-                fromVersionCode(LATEST)
+                fromVersionCode(LATEST.code)
             else
                 DiscordVersion(
                     codeReversed.slice(3..codeReversed.lastIndex).reversed().toInt(),
