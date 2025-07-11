@@ -37,7 +37,7 @@ import app.revenge.manager.utils.DiscordVersion
 import org.koin.androidx.compose.get
 import java.io.File
 
-class DeveloperSettings: Screen {
+class DeveloperSettings : Screen {
 
     @Composable
     @OptIn(ExperimentalMaterial3Api::class)
@@ -55,7 +55,10 @@ class DeveloperSettings: Screen {
 
         val supportingText = when {
             versionError -> stringResource(R.string.msg_invalid_version)
-            version.isNotBlank() -> DiscordVersion.fromVersionCode(version).toString()
+            version.isNotBlank() -> (DiscordVersion.fromVersionCode(version)?.toString() ?: run {
+                version = DiscordVersion.LATEST
+                DiscordVersion.fromVersionCode(DiscordVersion.LATEST).toString()
+            })
             else -> null
         }
 

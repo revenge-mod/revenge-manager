@@ -10,10 +10,11 @@ data class DiscordVersion(
     val type: Type
 ) : Serializable, Comparable<DiscordVersion> {
 
+
     enum class Type(val label: String, @StringRes val labelRes: Int) {
         STABLE("Stable", R.string.channel_stable),
         BETA("Beta", R.string.channel_beta),
-        ALPHA("Alpha", R.string.channel_alpha)
+        ALPHA("Alpha", R.string.channel_alpha),
     }
 
     override fun compareTo(other: DiscordVersion): Int =
@@ -24,6 +25,7 @@ data class DiscordVersion(
     fun toVersionCode() = "$major${type.ordinal}${if (minor < 10) 0 else ""}${minor}"
 
     companion object {
+        const val LATEST = "287013"
 
         fun fromVersionCode(string: String): DiscordVersion? = with(string) {
             if (length < 4) return@with null
@@ -32,9 +34,11 @@ data class DiscordVersion(
             val codeReversed = toCharArray().reversed().joinToString("")
             val typeInt = codeReversed[2].toString().toInt()
             val type = Type.values().getOrNull(typeInt) ?: return@with null
-            // maintain version below 287
+            //force stable channel
+            if (type != Type.STABLE) return@with null
+            // maintain version below 288
             if (287 < toInt() / 1000)
-                fromVersionCode("287013")
+                fromVersionCode(LATEST)
             else
                 DiscordVersion(
                     codeReversed.slice(3..codeReversed.lastIndex).reversed().toInt(),
