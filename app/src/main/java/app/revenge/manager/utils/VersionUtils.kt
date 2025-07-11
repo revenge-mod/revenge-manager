@@ -34,14 +34,7 @@ data class DiscordVersion(
             val type = Type.values().getOrNull(typeInt) ?: return@with null
             // maintain version below 287
             if (287 < toInt() / 1000)
-                when (typeInt) {
-                    0 -> fromVersionCode("287013") //latest stable version
-                    1 -> fromVersionCode("286109") //latest beta version
-                    2 -> fromVersionCode("287203") //latest alpha version
-                    else -> {
-                        fromVersionCode(string)
-                    }
-                }
+                fromVersionCode("287013")
             else
                 DiscordVersion(
                     codeReversed.slice(3..codeReversed.lastIndex).reversed().toInt(),
