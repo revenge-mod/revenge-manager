@@ -31,7 +31,7 @@ import app.revenge.manager.domain.manager.PreferenceManager
 import app.revenge.manager.ui.components.settings.SettingsSwitch
 import app.revenge.manager.ui.widgets.settings.ThemePicker
 import app.revenge.manager.utils.DimenUtils
-import org.koin.androidx.compose.get
+import org.koin.compose.koinInject
 
 class AppearanceSettings: Screen {
 

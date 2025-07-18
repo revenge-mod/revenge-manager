@@ -18,7 +18,7 @@ import app.revenge.manager.BuildConfig
 import app.revenge.manager.R
 import app.revenge.manager.domain.manager.PreferenceManager
 import app.revenge.manager.utils.DiscordVersion
-import org.koin.androidx.compose.get
+import org.koin.compose.koinInject
 
 @Composable
 fun ThemePreview(

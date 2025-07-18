@@ -56,7 +56,7 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import org.koin.androidx.compose.get
+import org.koin.compose.koinInject
 
 class HomeScreen : Screen {
 

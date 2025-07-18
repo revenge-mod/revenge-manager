@@ -34,7 +34,7 @@ import app.revenge.manager.ui.components.settings.SettingsSwitch
 import app.revenge.manager.ui.components.settings.SettingsTextField
 import app.revenge.manager.utils.DimenUtils
 import app.revenge.manager.utils.DiscordVersion
-import org.koin.androidx.compose.get
+import org.koin.compose.koinInject
 import java.io.File
 
 class DeveloperSettings: Screen {

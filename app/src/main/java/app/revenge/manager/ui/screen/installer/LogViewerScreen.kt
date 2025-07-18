@@ -48,7 +48,7 @@ import app.revenge.manager.ui.widgets.installer.LogLine
 import app.revenge.manager.utils.DimenUtils
 import app.revenge.manager.utils.rememberFileSaveLauncher
 import app.revenge.manager.utils.thenIf
-import org.koin.androidx.compose.get
+import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
 
 @OptIn(ExperimentalMaterial3Api::class)

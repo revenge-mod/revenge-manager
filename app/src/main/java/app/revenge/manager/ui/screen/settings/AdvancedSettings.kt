@@ -33,7 +33,7 @@ import app.revenge.manager.ui.components.settings.SettingsItemChoice
 import app.revenge.manager.ui.components.settings.SettingsSwitch
 import app.revenge.manager.ui.viewmodel.settings.AdvancedSettingsViewModel
 import app.revenge.manager.utils.DimenUtils
-import org.koin.androidx.compose.get
+import org.koin.compose.koinInject
 
 class AdvancedSettings: Screen {
 

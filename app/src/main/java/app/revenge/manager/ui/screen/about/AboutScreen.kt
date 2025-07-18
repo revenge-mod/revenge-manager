@@ -52,7 +52,7 @@ import app.revenge.manager.ui.widgets.about.LinkItem
 import app.revenge.manager.ui.widgets.about.ListItem
 import app.revenge.manager.ui.widgets.about.UserEntry
 import app.revenge.manager.utils.*
-import org.koin.androidx.compose.get
+import org.koin.compose.koinInject
 
 class AboutScreen : Screen {
 
