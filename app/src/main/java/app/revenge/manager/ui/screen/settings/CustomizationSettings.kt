@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -37,7 +37,7 @@ class CustomizationSettings: Screen {
     @OptIn(ExperimentalMaterial3Api::class)
     override fun Content() {
         val ctx = LocalContext.current
-        val prefs: PreferenceManager = get()
+        val prefs: PreferenceManager = koinInject()
         val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
 
         Scaffold(
@@ -96,7 +96,7 @@ class CustomizationSettings: Screen {
             navigationIcon = {
                 IconButton(onClick = { navigator.pop() }) {
                     Icon(
-                        imageVector = Icons.Filled.ArrowBack,
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = stringResource(R.string.action_back)
                     )
                 }

@@ -9,6 +9,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ProgressIndicatorDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -46,13 +47,14 @@ fun StepIcon(
         StepStatus.ONGOING -> {
             if(progress != null) {
                 CircularProgressIndicator(
-                    progress = progress,
-                    strokeWidth = strokeWidth,
+                    progress = { progress },
                     modifier = Modifier
                         .size(size)
                         .semantics {
                             contentDescription = "${(progress * 100).roundToInt()}%"
-                        }
+                        },
+                    strokeWidth = strokeWidth,
+                    trackColor = ProgressIndicatorDefaults.circularIndeterminateTrackColor,
                 )
             } else {
                 CircularProgressIndicator(

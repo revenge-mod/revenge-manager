@@ -11,9 +11,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.OpenInNew
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.filled.OpenInNew
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Button
@@ -53,7 +53,7 @@ import app.revenge.manager.utils.Constants
 import app.revenge.manager.utils.DiscordVersion
 import app.revenge.manager.utils.navigate
 import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.koin.getScreenModel
+import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import org.koin.androidx.compose.get
@@ -63,11 +63,11 @@ class HomeScreen : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-        val prefs: PreferenceManager = get()
-        val viewModel: HomeViewModel = getScreenModel()
+        val prefs: PreferenceManager = koinInject()
+        val viewModel: HomeViewModel = koinScreenModel()
 
         val currentVersion = remember {
-            DiscordVersion.fromVersionCode(viewModel.installManager.current?.versionCode.toString())
+            DiscordVersion.fromVersionCode(viewModel.installManager.current?.longVersionCode.toString())
         }
 
         val latestVersion =
@@ -184,7 +184,7 @@ class HomeScreen : Screen {
                         modifier = Modifier.clip(RoundedCornerShape(16.dp))
                     ) {
                         SegmentedButton(
-                            icon = Icons.Filled.OpenInNew,
+                            icon = Icons.AutoMirrored.Filled.OpenInNew,
                             text = stringResource(R.string.action_launch),
                             onClick = { viewModel.launchMod() }
                         )
@@ -224,7 +224,7 @@ class HomeScreen : Screen {
 
     @Composable
     private fun Actions() {
-        val viewModel: HomeViewModel = getScreenModel()
+        val viewModel: HomeViewModel = koinScreenModel()
         val navigator = LocalNavigator.currentOrThrow
 
         IconButton(onClick = { viewModel.getDiscordVersions() }) {

@@ -11,12 +11,12 @@ plugins {
 
 android {
     namespace = "app.revenge.manager"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "app.revenge.manager"
         minSdk = 28
-        targetSdk = 34
+        targetSdk = 35
         versionName = version.toString()
         versionCode = versionName!!.removePrefix("v").split("-").first().replace(".", "").toInt()
 
@@ -74,7 +74,8 @@ android {
         freeCompilerArgs += listOf(
             "-Xcontext-receivers",
             "-P",
-            "plugin:androidx.compose.compiler.plugins.kotlin:reportsDestination=${buildDir.resolve("report").absolutePath}",
+            "plugin:androidx.compose.compiler.plugins.kotlin:reportsDestination=" +
+                    layout.buildDirectory.get().asFile.resolve("report").absolutePath,
         )
     }
 

@@ -14,10 +14,10 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material3.Divider
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalContentColor
@@ -60,7 +60,7 @@ class AboutScreen : Screen {
     @OptIn(ExperimentalMaterial3Api::class)
     override fun Content() {
         val uriHandler = LocalUriHandler.current
-        val prefs: PreferenceManager = get()
+        val prefs: PreferenceManager = koinInject()
         val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
         val ctx = LocalContext.current
         val bitmap = remember {
@@ -172,10 +172,10 @@ class AboutScreen : Screen {
                                 }
                             )
                             if (i != Constants.TEAM_MEMBERS.lastIndex) {
-                                Divider(
+                                HorizontalDivider(
+                                    modifier = Modifier.padding(horizontal = 16.dp),
                                     thickness = 0.5.dp,
-                                    color = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f),
-                                    modifier = Modifier.padding(horizontal = 16.dp)
+                                    color = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f)
                                 )
                             }
                         }
@@ -240,6 +240,11 @@ class AboutScreen : Screen {
                                 uriHandler.openUri("https://github.com/rushiiMachine")
                             }
                         )
+                        HorizontalDivider(
+                            modifier = Modifier.padding(horizontal = 16.dp),
+                            thickness = 0.5.dp,
+                            color = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f)
+                        )
                         ListItem(
                             text = "Xinto",
                             subtext = "Developer of the preference manager",
@@ -261,11 +266,11 @@ class AboutScreen : Screen {
                         //     text = stringResource(R.string.label_translate),
                         //     onClick = { uriHandler.openUri("https://crowdin.com/project/vendetta-manager") }
                         // )
-//                        Divider(
-//                            thickness = 0.5.dp,
-//                            color = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f),
-//                            modifier = Modifier.padding(horizontal = 16.dp)
-//                        )
+                        // HorizontalDivider(
+                        //     modifier = Modifier.padding(horizontal = 16.dp),
+                        //     thickness = 0.5.dp,
+                        //     color = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f)
+                        // )
                         ListItem(
                             text = stringResource(R.string.title_os_libraries),
                             onClick = { navigator.push(LibrariesScreen()) }
@@ -289,7 +294,7 @@ class AboutScreen : Screen {
             navigationIcon = {
                 IconButton(onClick = { navigator.pop() }) {
                     Icon(
-                        imageVector = Icons.Filled.ArrowBack,
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = stringResource(R.string.action_back)
                     )
                 }

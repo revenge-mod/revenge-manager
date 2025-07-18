@@ -9,7 +9,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.outlined.MoreVert
 import androidx.compose.material.icons.outlined.Save
@@ -37,7 +37,7 @@ import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import app.revenge.manager.BuildConfig
 import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.koin.getScreenModel
+import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import app.revenge.manager.R
@@ -58,9 +58,9 @@ class LogViewerScreen(
 
     @Composable
     override fun Content() {
-        val prefs: PreferenceManager = get()
+        val prefs: PreferenceManager = koinInject()
         val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
-        val viewModel: LogViewerViewModel = getScreenModel {
+        val viewModel: LogViewerViewModel = koinScreenModel {
             parametersOf(logs)
         }
 
@@ -105,7 +105,7 @@ class LogViewerScreen(
             navigationIcon = {
                 IconButton(onClick = { navigator.pop() }) {
                     Icon(
-                        imageVector = Icons.Filled.ArrowBack,
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = stringResource(R.string.action_back)
                     )
                 }
@@ -152,7 +152,7 @@ class LogViewerScreen(
         expanded: Boolean,
         onDismiss: () -> Unit
     ) {
-        val prefs: PreferenceManager = get()
+        val prefs: PreferenceManager = koinInject()
 
         Box {
             DropdownMenu(

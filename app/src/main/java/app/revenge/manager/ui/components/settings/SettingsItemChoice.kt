@@ -21,7 +21,7 @@ inline fun <reified E : Enum<E>> SettingsItemChoice(
 ) {
     val ctx = LocalContext.current
     val choiceLabel = labelFactory(pref)
-    var opened = remember {
+    val opened = remember {
         mutableStateOf(false)
     }
 

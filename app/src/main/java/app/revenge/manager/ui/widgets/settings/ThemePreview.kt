@@ -25,7 +25,7 @@ fun ThemePreview(
     colorScheme: ColorScheme,
     modifier: Modifier = Modifier
 ) {
-    val prefs: PreferenceManager = get()
+    val prefs: PreferenceManager = koinInject()
     val light = colorScheme.background.luminance() > 0.5f
     val layerModifier = Modifier.height(300.dp)
     val iconColor = remember(prefs.patchIcon, prefs.channel) {

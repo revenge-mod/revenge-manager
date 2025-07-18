@@ -13,8 +13,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.outlined.Article
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.outlined.Article
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilledTonalButton
@@ -34,7 +34,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.core.screen.ScreenKey
-import cafe.adriel.voyager.koin.getScreenModel
+import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import app.revenge.manager.R
@@ -46,7 +46,7 @@ import app.revenge.manager.ui.widgets.dialog.DownloadFailedDialog
 import app.revenge.manager.ui.widgets.installer.StepGroupCard
 import app.revenge.manager.utils.DiscordVersion
 import okhttp3.internal.toImmutableList
-import org.koin.androidx.compose.get
+import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
 import java.util.UUID
 
@@ -60,7 +60,7 @@ class InstallerScreen(
     override fun Content() {
         val nav = LocalNavigator.currentOrThrow
         val activity = LocalContext.current as? ComponentActivity
-        val viewModel: InstallerViewModel = getScreenModel {
+        val viewModel: InstallerViewModel = koinScreenModel {
             parametersOf(version)
         }
 
@@ -189,7 +189,7 @@ class InstallerScreen(
         onBackClick: () -> Unit,
         viewModel: InstallerViewModel
     ) {
-        val prefs: PreferenceManager = get()
+        val prefs: PreferenceManager = koinInject()
         val nav = LocalNavigator.currentOrThrow
 
         TopAppBar(
@@ -197,7 +197,7 @@ class InstallerScreen(
             navigationIcon = {
                 IconButton(onClick = onBackClick) {
                     Icon(
-                        imageVector = Icons.Filled.ArrowBack,
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = stringResource(R.string.action_back)
                     )
                 }
@@ -206,7 +206,7 @@ class InstallerScreen(
                 if (prefs.isDeveloper && viewModel.runner.completed) {
                     IconButton(onClick = { nav.push(LogViewerScreen(viewModel.runner.logger.logs.toImmutableList())) }) {
                         Icon(
-                            imageVector = Icons.Outlined.Article,
+                            imageVector = Icons.AutoMirrored.Outlined.Article,
                             contentDescription = stringResource(R.string.action_view_logs)
                         )
                     }

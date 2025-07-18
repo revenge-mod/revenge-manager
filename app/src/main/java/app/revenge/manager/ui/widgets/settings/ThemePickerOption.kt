@@ -3,7 +3,6 @@ package app.revenge.manager.ui.widgets.settings
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -29,7 +28,6 @@ import app.revenge.manager.domain.manager.Theme
 import app.revenge.manager.utils.contentDescription
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ThemePickerOption(
     theme: Theme,
