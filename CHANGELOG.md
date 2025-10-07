@@ -1,3 +1,10 @@
+## [1.2.1-dev.1](https://github.com/revenge-mod/revenge-manager/compare/v1.2.0...v1.2.1-dev.1) (2025-10-07)
+
+
+### Bug Fixes
+
+* **InstallStep/Shizuku:** Installation method fallback ([#37](https://github.com/revenge-mod/revenge-manager/issues/37)) ([422ae0a](https://github.com/revenge-mod/revenge-manager/commit/422ae0aeb6814f8db67e77480b30de7fb54cd4bb))
+
 # [1.2.0](https://github.com/revenge-mod/revenge-manager/compare/v1.1.0...v1.2.0) (2025-03-17)
 
 
