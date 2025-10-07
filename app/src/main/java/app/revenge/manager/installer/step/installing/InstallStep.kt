@@ -14,6 +14,8 @@ import app.revenge.manager.installer.step.StepRunner
 import app.revenge.manager.utils.isMiui
 import app.revenge.manager.utils.showToast
 import org.koin.core.component.inject
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.io.File
 
 /**
@@ -42,7 +44,9 @@ class InstallStep(
 
         val installMethod = if (preferences.installMethod == InstallMethod.SHIZUKU && !ShizukuPermissions.waitShizukuPermissions()) {
             // Temporarily use DEFAULT if SHIZUKU permissions are not granted
-            context.showToast(R.string.msg_shizuku_denied)
+            withContext(Dispatchers.Main) {
+                context.applicationContext.showToast(R.string.msg_shizuku_denied)
+            }
             InstallMethod.DEFAULT
         } else {
             preferences.installMethod
