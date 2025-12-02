@@ -4,6 +4,7 @@ import app.revenge.manager.network.service.HttpService
 import app.revenge.manager.network.service.RestService
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO
+import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
@@ -20,6 +21,11 @@ val httpModule = module {
     fun provideHttpClient(json: Json) = HttpClient(CIO) {
         install(ContentNegotiation) {
             json(json)
+        }
+
+        install(HttpTimeout) {
+            socketTimeoutMillis = 15000
+            connectTimeoutMillis = 15000
         }
     }
 
