@@ -165,6 +165,12 @@
     <string name="label_special_thanks">Special thanks</string>
     <string name="label_translate">Translate</string>
 
+    <string name="battery_opt_title">Battery Optimization</string>
+    <string name="battery_opt_description">Disabling battery optimization is required to keep downloads running reliably in the background or when the screen is off.</string>
+    <string name="battery_opt_confirm">Allow</string>
+    <string name="battery_opt_dismiss">Later</string>
+    <string name="battery_opt_error">Could not open battery optimization settings.</string>
+
     <string name="version_latest">Latest: %1$s</string>
     <string name="version_target">Target: %1$s</string>
     <string name="version_current">Current: %1$s</string>

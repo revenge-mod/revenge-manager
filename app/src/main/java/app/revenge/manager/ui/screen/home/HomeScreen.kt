@@ -46,6 +46,7 @@ import app.revenge.manager.ui.screen.installer.InstallerScreen
 import app.revenge.manager.ui.screen.settings.SettingsScreen
 import app.revenge.manager.ui.viewmodel.home.HomeViewModel
 import app.revenge.manager.ui.widgets.AppIcon
+import app.revenge.manager.ui.widgets.dialog.BatteryOptimizationDialog
 import app.revenge.manager.ui.widgets.dialog.StoragePermissionsDialog
 import app.revenge.manager.ui.widgets.home.CommitList
 import app.revenge.manager.ui.widgets.updater.UpdateDialog
@@ -81,6 +82,7 @@ class HomeScreen : Screen {
         // == Dialogs == //
 
         StoragePermissionsDialog()
+        BatteryOptimizationDialog()
 
         if (
             viewModel.showUpdateDialog &&
