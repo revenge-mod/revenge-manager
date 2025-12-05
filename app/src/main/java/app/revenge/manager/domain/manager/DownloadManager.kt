@@ -40,6 +40,9 @@ class DownloadManager(
         val tempOut = out.resolveSibling("${out.name}.tmp")
         if (tempOut.exists()) tempOut.delete()
 
+        var bytesCopied = 0L
+        var totalBytes = 0L
+
         try {
             httpClient.prepareGet(url).execute { response ->
                 if (!response.status.isSuccess()) {
@@ -47,8 +50,7 @@ class DownloadManager(
                 }
 
                 val body = response.bodyAsChannel()
-                val totalBytes = response.contentLength() ?: 0L
-                var bytesCopied = 0L
+                totalBytes = response.contentLength() ?: 0L
 
                 tempOut.outputStream().use { output ->
                     val buffer = ByteArray(1024 * 256)
@@ -82,6 +84,18 @@ class DownloadManager(
         } catch (e: Exception) {
             tempOut.delete()
             return DownloadResult.Error(e.message ?: "Unknown download error")
+        }
+
+        if (totalBytes > 0 && bytesCopied < totalBytes) {
+            val difference = totalBytes - bytesCopied
+            val percentageDifference = difference.toFloat() / totalBytes.toFloat()
+
+            // We consider a download incomplete if more than 1% of the data is missing, because
+            // sometimes the content length provided by the server can be slightly off
+            if (percentageDifference > 0.01f) {
+                tempOut.delete()
+                return DownloadResult.Error("Download incomplete. Expected $totalBytes bytes, but got $bytesCopied")
+            }
         }
 
         if (tempOut.exists() && tempOut.length() > 0) {
