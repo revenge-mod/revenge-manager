@@ -15,8 +15,12 @@ class DownloadManager(
     private val httpClient: HttpClient
 ) {
 
-    suspend fun downloadUpdate(url: String, out: File, onProgressUpdate: (Float?) -> Unit) {
-        download(url, out) { progress ->
+    suspend fun downloadUpdate(
+        url: String,
+        out: File,
+        onProgressUpdate: (Float?) -> Unit
+    ): DownloadResult {
+        return download(url, out) { progress ->
             onProgressUpdate(progress)
         }
     }
