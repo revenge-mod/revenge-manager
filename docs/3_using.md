@@ -25,23 +25,22 @@ release channels, which are sorted from the most stable to the least stable.
 Once you're set all, go to Home page and reinstall the app.
 
 > [!NOTE]
-> When switching from higher release channel, to lower release channel,
-> you need to wait for that channel to have a higher version than your 
-> currently installed version.
-> 
-> Alternatively, you can uninstall it but you need to login to discord again.
+> **Downgrading Channels:** If you switch from a higher release channel (e.g., Alpha) to a lower one (e.g., Stable),
+> you must wait for the lower channel's version number to exceed your currently installed version.
+>
+> Alternatively, uninstall the app and reinstall it. You will need to log in to Discord again.
 
 ### Change update frequency, installation methods and assets mirror
 
 ⚙️ Settings > ☰ Advanced
 
-You can set change how often the Revenge Manager should check for update, how 
+You can set change how often the Revenge Manager should check for update, how
 Revenge Manager get its Discord app, and how the Manager should install the app,
 and also clears its cache.
 
 > [!NOTE]
-> To use Shizuku as install method, you need to have [Shizuku](https://play.google.com/store/apps/details?id=moe.shizuku.privileged.api)
-> installed on your device. For most user leave it by default is recommended.
+> The **Shizuku** installation method requires the [Shizuku app](https://play.google.com/store/apps/details?id=moe.shizuku.privileged.api).
+> We recommend keeping the default settings unless you have a specific need.
 
 ### About
 
@@ -52,10 +51,10 @@ team of Revenge, and special thanks to contributors that helped make
 Revenge Manager possible.
 
 > [!WARNING]
-> You may have the option to toggle Developer Options here, documentation is not 
-> available to developer settings
+> This screen allows you to toggle **Developer Options**. These settings are intended for development purposes only and may be undocumented.
 
 ## ⏭️ The end
 
 In the mean time you can read the [📜 Release notes](/CHANGELOG.md) for 
 Revenge Manager
+
