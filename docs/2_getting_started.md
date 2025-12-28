@@ -2,11 +2,11 @@
 
 ## Overview
 
-Top-to-bottom, left-to-right
+The Revenge Manager home screen displays the following:
 
-1.  Home page, ⭮ refresh and ⚙️ settings button
-2.  Revenge Discord, version, and **install** button
-3.  Commit history `("Changelog")`
+1.  **Home** title, **Refresh** (⭮) and ⚙️ **Settings** button
+2.  **Revenge** app status, version, and **Install** button
+3.  **Changelog** `("Commit history")`
 
 ## Installing Revenge Discord using Revenge Manager
 
@@ -16,20 +16,20 @@ a prompt to allow special permission will show up, from there follow the
 instruction on the screen.
 
 > [!NOTE]
-> This may differ from device manufacturer to manufacturer, if there isn't 
-> an instruction on the screen, you may need to go to app properties of 
-> Revenge Manager, find install unknown app option and allow it.
+> If instructions do not appear, go to your device's **App Info** for Revenge Manager, find **Install unknown apps**, and allow it.
+> 
+> **_Steps may vary by device manufacturer._**
 
-Should you discover any issue with the installation, clear the cache and try again. 
-If that doesn't work, file an issue at the Revenge Manager's [repository](https://github.com/revenge-mod/revenge-manager/issues/new?template=bug_report.yml).
+If you discover any issue with the installation, clear the cache and try again. 
+If the issue persist, file an issue at the [Revenge Manager repository](https://github.com/revenge-mod/revenge-manager/issues/new?template=bug_report.yml).
 
 ## ⭮ Refresh or ⚙️ configure the Revenge Manager
 
-If an update has been announced but you haven't gotten it, try refreshing by 
-pressing the ⭮ refresh button.
+If an update is available but does not appear in the list, tap **Refresh** (⭮).
 
-For configuring Revenge Manager check this documentation. (placeholder)
+To configure Revenge Manager settings, see [Configuring Revenge Manager](3_using.md#-configuring-revenge-manager).
 
 ## ⏭️ Next
 
 [⚙️ Using Revenge Manager](3_using.md)
+
