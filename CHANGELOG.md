@@ -1,3 +1,20 @@
+# [1.3.0](https://github.com/revenge-mod/revenge-manager/compare/v1.2.0...v1.3.0) (2026-01-12)
+
+
+### Bug Fixes
+
+* **download:** Handle app update download failures ([03b614d](https://github.com/revenge-mod/revenge-manager/commit/03b614da5b05daecb0ff0ff39141931523f40f06))
+* **DownloadManager:** Don't cache incomplete downloads ([0b3890b](https://github.com/revenge-mod/revenge-manager/commit/0b3890b691d8d9e82e068ca4452526d0e4159a3a))
+* **DownloadManager:** Replace system DownloadManager with Ktor ([0ffe251](https://github.com/revenge-mod/revenge-manager/commit/0ffe2516fe175a2028e5fc302f4c5eb04f82d722))
+* **DownloadManager:** Replace system DownloadManager with Ktor ([#48](https://github.com/revenge-mod/revenge-manager/issues/48)) ([bd1faca](https://github.com/revenge-mod/revenge-manager/commit/bd1faca774215f23af044e0e492f4986803effe1))
+* **InstallStep/Shizuku:** Installation method fallback ([#37](https://github.com/revenge-mod/revenge-manager/issues/37)) ([422ae0a](https://github.com/revenge-mod/revenge-manager/commit/422ae0aeb6814f8db67e77480b30de7fb54cd4bb))
+* update strings casing ([#50](https://github.com/revenge-mod/revenge-manager/issues/50)) ([2a3da1b](https://github.com/revenge-mod/revenge-manager/commit/2a3da1bf6801d1d1a14376c5915d0f421b19f3ca))
+
+
+### Features
+
+* Add battery optimization request dialog ([9897c4e](https://github.com/revenge-mod/revenge-manager/commit/9897c4e970c4be6f3a7a7804dfece30d01abdcaa))
+
 # [1.3.0-dev.1](https://github.com/revenge-mod/revenge-manager/compare/v1.2.1-dev.1...v1.3.0-dev.1) (2026-01-12)
 
 
