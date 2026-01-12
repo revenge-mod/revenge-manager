@@ -61,16 +61,20 @@ abstract class DownloadStep : Step() {
 
     suspend fun download(downloadUrl: String, destination: File, runner: StepRunner): Boolean {
         val fileName = destination.name
-        var lastProgress: Float? = null
+        var lastLoggedPercentage = -1
+        val logIncrement = 10
 
         runner.logger.i("Downloading $fileName from $downloadUrl")
 
         val result = downloadManager.download(downloadUrl, destination) { newProgress ->
             progress = newProgress
 
-            if (newProgress != lastProgress && newProgress != null) {
-                lastProgress = newProgress
-                runner.logger.d("$fileName download progress: ${(newProgress * 100f).roundToInt()}%")
+            if (newProgress != null) {
+                val currentPercentage = (newProgress * 100f).roundToInt()
+                if (currentPercentage > lastLoggedPercentage && (currentPercentage % logIncrement == 0)) {
+                    lastLoggedPercentage = currentPercentage
+                    runner.logger.d("$fileName download progress: $currentPercentage%")
+                }
             }
         }
 

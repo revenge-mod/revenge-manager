@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Environment
 import android.provider.Settings
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -14,6 +15,7 @@ import androidx.paging.cachedIn
 import app.revenge.manager.BuildConfig
 import app.revenge.manager.R
 import app.revenge.manager.domain.manager.DownloadManager
+import app.revenge.manager.domain.manager.DownloadResult
 import app.revenge.manager.domain.manager.InstallManager
 import app.revenge.manager.domain.manager.InstallMethod
 import app.revenge.manager.domain.manager.PreferenceManager
@@ -133,8 +135,17 @@ class HomeViewModel(
             val update = File(cacheDir, "update.apk")
             if (update.exists()) update.delete()
             isUpdating = true
-            downloadManager.downloadUpdate(updateDownloadUrl!!, update, onProgressUpdate)
+            val downloadResult =
+                downloadManager.downloadUpdate(updateDownloadUrl!!, update, onProgressUpdate)
             isUpdating = false
+
+            if (downloadResult !is DownloadResult.Success) {
+                if (downloadResult is DownloadResult.Error) {
+                    Log.e("HomeViewModel", "Download failed: ${downloadResult.debugReason}")
+                    context.showToast(R.string.msg_download_failed)
+                }
+                return@launch
+            }
 
             val installMethod = if (prefs.installMethod == InstallMethod.SHIZUKU && !ShizukuPermissions.waitShizukuPermissions()) {
                 // Temporarily use DEFAULT if SHIZUKU permissions are not granted

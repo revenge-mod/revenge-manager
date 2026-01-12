@@ -1,152 +1,120 @@
 package app.revenge.manager.domain.manager
 
-import android.app.DownloadManager
-import android.content.Context
-import android.database.Cursor
-import android.net.Uri
-import androidx.core.content.getSystemService
-import app.revenge.manager.BuildConfig
+import io.ktor.client.HttpClient
+import io.ktor.client.request.prepareGet
+import io.ktor.client.statement.bodyAsChannel
+import io.ktor.http.contentLength
+import io.ktor.http.isSuccess
+import io.ktor.utils.io.readAvailable
 import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.delay
 import java.io.File
+import java.io.IOException
+import java.net.SocketTimeoutException
 
 class DownloadManager(
-    private val context: Context,
-    private val prefs: PreferenceManager
+    private val httpClient: HttpClient
 ) {
 
-    suspend fun downloadDiscordApk(version: String, out: File, onProgressUpdate: (Float?) -> Unit): DownloadResult =
-        download("${prefs.mirror.baseUrl}/tracker/download/$version/base", out, onProgressUpdate)
-
-    suspend fun downloadSplit(version: String, split: String, out: File, onProgressUpdate: (Float?) -> Unit): DownloadResult =
-        download("${prefs.mirror.baseUrl}/tracker/download/$version/$split", out, onProgressUpdate)
-
-    suspend fun downloadMod(out: File, onProgressUpdate: (Float?) -> Unit) =
-        download(
-            "https://github.com/revenge-mod/revenge-xposed/releases/latest/download/app-release.apk",
-            out,
-            onProgressUpdate
-        )
-
-    suspend fun downloadUpdate(url: String, out: File, onProgressUpdate: (Float?) -> Unit) {
-        download(url, out) { progress ->
+    suspend fun downloadUpdate(
+        url: String,
+        out: File,
+        onProgressUpdate: (Float?) -> Unit
+    ): DownloadResult {
+        return download(url, out) { progress ->
             onProgressUpdate(progress)
         }
     }
 
     /**
-     * Start a cancellable download with the system [DownloadManager].
-     * If the current [CoroutineScope] is cancelled, then the system download will be cancelled
-     * almost immediately.
-     * @param url Remote src url
-     * @param out Target path to download to
-     * @param onProgressUpdate Download progress update in a `[0,1]` range, and if null then the
-     *                         download is currently in a pending state. This is called every 100ms.
+     * Starts a cancellable download using Ktor.
+     * If the current [CoroutineScope] is cancelled, then the download will be cancelled.
+     * @param url Remote src url.
+     * @param out Target path to download to.
+     * @param onProgressUpdate Callback for progress updates in a `[0,1]` range. `null` is emitted
+     *                         once at the start to indicate a pending state.
      */
     suspend fun download(
         url: String,
         out: File,
         onProgressUpdate: (Float?) -> Unit
     ): DownloadResult {
-        val downloadManager = context.getSystemService<DownloadManager>()
-            ?: throw IllegalStateException("DownloadManager service is not available")
+        onProgressUpdate(null)
+        out.parentFile?.mkdirs()
 
-        val downloadId = DownloadManager.Request(Uri.parse(url))
-            .setTitle("${BuildConfig.MOD_NAME} Manager")
-            .setDescription("Downloading ${out.name}...")
-            .setDestinationUri(Uri.fromFile(out))
-            .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE)
-            .setAllowedOverMetered(true)
-            .setAllowedOverRoaming(true)
-            .let(downloadManager::enqueue)
+        val tempOut = out.resolveSibling("${out.name}.tmp")
+        if (tempOut.exists()) tempOut.delete()
 
-        val lastProgressTime = System.currentTimeMillis()
+        var bytesCopied = 0L
+        var totalBytes = 0L
 
-        // Repeatedly request download state until it is finished
-        while (true) {
-            try {
-                // Hand over control to a suspend function to check for cancellation
-                delay(100)
-            } catch (_: CancellationException) {
-                // If the running CoroutineScope has been cancelled, then gracefully cancel download
-                downloadManager.remove(downloadId)
-                return DownloadResult.Cancelled(systemTriggered = false)
-            }
+        try {
+            httpClient.prepareGet(url).execute { response ->
+                if (!response.status.isSuccess()) {
+                    throw IOException("HTTP Error: ${response.status}")
+                }
 
-            // Request download status
-            val cursor = DownloadManager.Query()
-                .setFilterById(downloadId)
-                .let(downloadManager::query)
+                val body = response.bodyAsChannel()
+                totalBytes = response.contentLength() ?: 0L
 
-            // No results in cursor, download was cancelled
-            if (!cursor.moveToFirst()) {
-                cursor.close()
-                return DownloadResult.Cancelled(systemTriggered = true)
-            }
+                tempOut.outputStream().use { output ->
+                    val buffer = ByteArray(1024 * 256)
+                    var bytesRead: Int
 
-            val statusColumn = cursor.getColumnIndex(DownloadManager.COLUMN_STATUS)
-            val status = cursor.getInt(statusColumn)
+                    while (!body.isClosedForRead) {
+                        bytesRead = body.readAvailable(buffer)
+                        if (bytesRead < 0) break
+                        output.write(buffer, 0, bytesRead)
+                        bytesCopied += bytesRead
 
-            cursor.use {
-                when (status) {
-                    DownloadManager.STATUS_PENDING, DownloadManager.STATUS_PAUSED -> {
-                        val currentTime = System.currentTimeMillis()
-                        val elapsedTime = currentTime - lastProgressTime
-
-                        if (elapsedTime >= 5000L) {
-                            return DownloadResult.Error(debugReason = "Download timeout")
+                        if (totalBytes > 0) {
+                            val progress =
+                                (bytesCopied.toFloat() / totalBytes.toFloat()).coerceIn(0f, 1f)
+                            onProgressUpdate(progress)
+                        } else {
+                            onProgressUpdate(null)
                         }
-
-                        onProgressUpdate(null)
-                    }
-
-                    DownloadManager.STATUS_RUNNING ->
-                        onProgressUpdate(getDownloadProgress(cursor))
-
-                    DownloadManager.STATUS_SUCCESSFUL ->
-                        return DownloadResult.Success
-
-                    DownloadManager.STATUS_FAILED -> {
-                        val reasonColumn = cursor.getColumnIndex(DownloadManager.COLUMN_REASON)
-                        val reason = cursor.getInt(reasonColumn)
-
-                        return DownloadResult.Error(debugReason = convertErrorCode(reason))
                     }
                 }
             }
+        } catch (_: CancellationException) {
+            tempOut.delete()
+            return DownloadResult.Cancelled
+        } catch (_: SocketTimeoutException) {
+            tempOut.delete()
+            return DownloadResult.Error("Download timed out")
+        } catch (e: IOException) {
+            tempOut.delete()
+            return DownloadResult.Error("Download failed: ${e.message}")
+        } catch (e: Exception) {
+            tempOut.delete()
+            return DownloadResult.Error(e.message ?: "Unknown download error")
+        }
+
+        if (totalBytes > 0 && bytesCopied < totalBytes) {
+            val difference = totalBytes - bytesCopied
+            val percentageDifference = difference.toFloat() / totalBytes.toFloat()
+
+            // We consider a download incomplete if more than 1% of the data is missing, because
+            // sometimes the content length provided by the server can be slightly off
+            if (percentageDifference > 0.01f) {
+                tempOut.delete()
+                return DownloadResult.Error("Download incomplete. Expected $totalBytes bytes, but got $bytesCopied")
+            }
+        }
+
+        if (tempOut.exists() && tempOut.length() > 0) {
+            if (out.exists()) out.delete()
+            tempOut.renameTo(out)
+            return DownloadResult.Success
+        } else {
+            tempOut.delete()
+            return DownloadResult.Error("Downloaded file is empty or missing")
         }
     }
-
-    private fun getDownloadProgress(queryCursor: Cursor): Float? {
-        val bytesColumn = queryCursor.getColumnIndex(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR)
-        val bytes = queryCursor.getLong(bytesColumn)
-
-        val totalBytesColumn = queryCursor.getColumnIndex(DownloadManager.COLUMN_TOTAL_SIZE_BYTES)
-        val totalBytes = queryCursor.getLong(totalBytesColumn)
-
-        if (totalBytes <= 0) return null
-        return bytes.toFloat() / totalBytes
-    }
-
-    private fun convertErrorCode(code: Int) = when (code) {
-        DownloadManager.ERROR_UNKNOWN -> "UNKNOWN"
-        DownloadManager.ERROR_FILE_ERROR -> "FILE_ERROR"
-        DownloadManager.ERROR_UNHANDLED_HTTP_CODE -> "UNHANDLED_HTTP_CODE"
-        DownloadManager.ERROR_HTTP_DATA_ERROR -> "HTTP_DATA_ERROR"
-        DownloadManager.ERROR_TOO_MANY_REDIRECTS -> "TOO_MANY_REDIRECTS"
-        DownloadManager.ERROR_INSUFFICIENT_SPACE -> "INSUFFICIENT_SPACE"
-        DownloadManager.ERROR_DEVICE_NOT_FOUND -> "DEVICE_NOT_FOUND"
-        DownloadManager.ERROR_CANNOT_RESUME -> "CANNOT_RESUME"
-        DownloadManager.ERROR_FILE_ALREADY_EXISTS -> "FILE_ALREADY_EXISTS"
-        /* DownloadManager.ERROR_BLOCKED */ 1010 -> "NETWORK_BLOCKED"
-        else -> "UNKNOWN_CODE"
-    }
-
 }
 
 sealed interface DownloadResult {
     data object Success : DownloadResult
-    data class Cancelled(val systemTriggered: Boolean) : DownloadResult
+    data object Cancelled : DownloadResult
     data class Error(val debugReason: String) : DownloadResult
 }
