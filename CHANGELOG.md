@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/revenge-mod/revenge-manager/compare/v1.3.0...v1.3.1) (2026-10-23)
+
+
+### Bug Fixes
+
+* handle missing icon files due to resource shrinking ([afedc0b](https://github.com/revenge-mod/revenge-manager/commit/afedc0b43a3b09c49f8eddb7915715e69b91d173))
+
 # [1.3.0](https://github.com/revenge-mod/revenge-manager/compare/v1.2.0...v1.3.0) (2026-01-12)
 
 
