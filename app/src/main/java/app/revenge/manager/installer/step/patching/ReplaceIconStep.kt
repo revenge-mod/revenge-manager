@@ -17,7 +17,10 @@ import app.revenge.manager.installer.utils.ArscUtil.getPackageChunk
 import app.revenge.manager.installer.utils.ArscUtil.getResourceFileName
 import app.revenge.manager.installer.utils.AxmlUtil
 import app.revenge.manager.utils.DiscordVersion
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.koin.core.component.inject
+import java.util.zip.ZipFile
 
 /**
  * Replaces the existing app icons with Revenge tinted ones
@@ -51,11 +54,19 @@ class ReplaceIconStep : Step() {
             else -> null
         }
         
-        for (rscFile in setOf(squareIconFile, roundIconFile)) { // setOf to not possibly patch same file twice
-            val referencePath = if (postfix == null) rscFile else {
-                rscFile.replace("_$postfix.xml", ".xml")
-            }
+        val apkEntries = withContext(Dispatchers.IO) {
+            ZipFile(baseApk).use { zip -> zip.entries().asSequence().map { it.name }.toSet() }
+        }
 
+        // setOf to not possibly patch same file twice
+        for (rscFile in setOf(squareIconFile, roundIconFile)) { 
+            // Discord recently enabled resource shrinking, which strips the other channels' icons,
+            // so some icons may not exist
+            val referencePath = postfix
+                ?.let { rscFile.replace("_$it.xml", ".xml") }
+                ?.takeIf { it in apkEntries }
+                ?: rscFile
+        
             runner.logger.i("Patching adaptive icon ($rscFile <- $referencePath)")
 
             AxmlUtil.patchAdaptiveIcon(
