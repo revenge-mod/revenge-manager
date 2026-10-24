@@ -61,7 +61,7 @@ koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin"
 
 # Ktor
 ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
-ktor-client-cio = { group = "io.ktor", name = "ktor-client-cio", version.ref = "ktor" }
+ktor-client-okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "ktor" }
 ktor-client-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-serialization-kotlinx-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }
 ktor-client-logging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "ktor" }
@@ -90,7 +90,7 @@ androidx = ["androidx-work-runtime", "androidx-paging-compose", "androidx-lifecy
 coil = ["coil", "coil-compose"]
 compose = ["compose-activity", "compose-material-icons-extended", "compose-material3", "compose-ui", "compose-ui-graphics", "compose-ui-tooling-preview"]
 koin = ["koin-android", "koin-androidx-compose", "koin-core"]
-ktor = ["ktor-client-cio", "ktor-client-content-negotiation", "ktor-client-core", "ktor-client-logging", "ktor-serialization-kotlinx-json"]
+ktor = ["ktor-client-okhttp", "ktor-client-content-negotiation", "ktor-client-core", "ktor-client-logging", "ktor-serialization-kotlinx-json"]
 shizuku = ["shizuku-api", "shizuku-provider"]
 voyager = ["voyager-koin", "voyager-navigator", "voyager-tab-navigator", "voyager-transitions", "voyager-screenmodel"]
 
