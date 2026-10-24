@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/revenge-mod/revenge-manager/compare/v1.3.1...v1.3.2) (2026-10-24)
+
+
+### Bug Fixes
+
+* replace Ktor CIO engine with OkHttp ([#71](https://github.com/revenge-mod/revenge-manager/issues/71)) ([bb4617c](https://github.com/revenge-mod/revenge-manager/commit/bb4617c285061f10a07c7d46d6196f38eda1c74b))
+
 ## [1.3.1](https://github.com/revenge-mod/revenge-manager/compare/v1.3.0...v1.3.1) (2026-10-23)
 
 
