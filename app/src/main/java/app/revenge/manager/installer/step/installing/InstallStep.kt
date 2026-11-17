@@ -41,6 +41,8 @@ class InstallStep(
         runner.logger.i("Installing apks")
         val files = lspatchedDir.listFiles()
             ?.takeIf { it.isNotEmpty() }
+            ?.sortedBy { if (it.name.startsWith("base-")) 0 else 1 }
+            ?.toTypedArray()
             ?: throw Error("Missing APKs from LSPatch step; failure likely")
 
         val hasShizukuPermission = when {

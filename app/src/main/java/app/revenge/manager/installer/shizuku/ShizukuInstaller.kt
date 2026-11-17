@@ -42,11 +42,10 @@ class ShizukuInstaller(private val context: Context) : Installer, KoinComponent 
                     executeShellCommand("cp ${shellQuote(apk.absolutePath)} ${shellQuote(remote.absolutePath)}")
                 }
 
-                val installCommand = if (remoteApks.size == 1) {
-                    "pm install -r ${shellQuote(remoteApks.single().absolutePath)}"
-                } else {
-                    "pm install-multiple -r ${remoteApks.joinToString(" ") { shellQuote(it.absolutePath) }}"
-                }
+                // Newer Android releases no longer expose `pm install-multiple`;
+                // `pm install` accepts the base APK followed by its split APKs.
+                val installCommand =
+                    "pm install -r ${remoteApks.joinToString(" ") { shellQuote(it.absolutePath) }}"
                 val result = executeShellCommand(installCommand)
                 if (result.lineSequence().none { it.trim() == "Success" }) {
                     throw RuntimeException("Package Manager did not report a successful install: $result")
