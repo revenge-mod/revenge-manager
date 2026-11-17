@@ -3,7 +3,6 @@ package app.revenge.manager.ui.viewmodel.settings
 import android.content.Context
 import android.os.Environment
 import androidx.work.ExistingPeriodicWorkPolicy
-import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
@@ -33,14 +32,11 @@ class AdvancedSettingsViewModel(
     fun updateCheckerDuration(updateCheckerDuration: UpdateCheckerDuration) {
         val wm = WorkManager.getInstance(context)
         when (updateCheckerDuration) {
-            UpdateCheckerDuration.DISABLED -> wm.cancelUniqueWork("app.revenge.manager.UPDATE_CHECK")
+            UpdateCheckerDuration.DISABLED -> wm.cancelUniqueWork(UpdateWorker.WORK_NAME)
             else -> wm.enqueueUniquePeriodicWork(
-                "app.revenge.manager.UPDATE_CHECK",
+                UpdateWorker.WORK_NAME,
                 ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE,
-                PeriodicWorkRequestBuilder<UpdateWorker>(
-                    updateCheckerDuration.time,
-                    updateCheckerDuration.unit
-                ).build()
+                UpdateWorker.periodicRequest(updateCheckerDuration)
             )
         }
     }

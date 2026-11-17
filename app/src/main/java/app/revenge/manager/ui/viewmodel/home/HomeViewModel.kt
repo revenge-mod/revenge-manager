@@ -160,7 +160,7 @@ class HomeViewModel(
                 InstallMethod.SHIZUKU -> ShizukuInstaller(context)
             }
 
-            installer.installApks(silent = !isMiui, update)
+            installer.installApks(silent = !isMiui, unattended = false, update)
         }
     }
 

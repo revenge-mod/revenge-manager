@@ -99,6 +99,9 @@
     <string name="title_about">About</string>
     <string name="title_permission_grant">Grant permissions</string>
     <string name="title_update_available">New Discord update available!</string>
+    <string name="title_update_installed">Discord update installed</string>
+    <string name="title_update_needs_approval">Update needs approval</string>
+    <string name="title_update_failed">Discord update failed</string>
     <string name="title_warning">Warning</string>
     <string name="title_dl_failed">Download failed</string>
     <string name="title_logs">Logs</string>
@@ -124,6 +127,8 @@
     <string name="settings_dynamic_color_description">Only available on Android 12 and up</string>
     <string name="settings_theme">Theme</string>
     <string name="settings_check_updates">Check for Discord updates</string>
+    <string name="settings_unattended_updates">Unattended updates</string>
+    <string name="settings_unattended_updates_description">When periodic checking is enabled, automatically download, patch, and install Discord updates. Android may still ask for approval; Shizuku can install without a prompt.</string>
 
     <string name="settings_customization">Customization</string>
     <string name="settings_customization_description">Customize your Revenge installation</string>
@@ -177,4 +182,7 @@
     <string name="install_method">Install method</string>
     <string name="default_installer">PackageManager (recommended)</string>
     <string name="shizuku_installer">Shizuku</string>
+    <string name="msg_update_installed">Discord was updated successfully</string>
+    <string name="msg_update_needs_approval">Tap to approve installing the update</string>
+    <string name="msg_update_failed">The update could not be installed: %1$s</string>
 </resources>

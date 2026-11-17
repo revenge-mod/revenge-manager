@@ -154,9 +154,11 @@ abstract class DownloadStep : Step() {
         }
 
         if (!successfulDownload) {
-            mainThread {
-                context.showToast(R.string.msg_download_failed)
-                runner.downloadErrored = true
+            runner.downloadErrored = true
+            if (!runner.unattended) {
+                mainThread {
+                    context.showToast(R.string.msg_download_failed)
+                }
             }
             throw Error("Failed to download $fileName from all mirrors.")
         }
@@ -166,8 +168,10 @@ abstract class DownloadStep : Step() {
             verify()
             runner.logger.i("$fileName downloaded successfully")
         } catch (t: Throwable) {
-            mainThread {
-                context.showToast(R.string.msg_download_verify_failed)
+            if (!runner.unattended) {
+                mainThread {
+                    context.showToast(R.string.msg_download_verify_failed)
+                }
             }
             throw t
         }

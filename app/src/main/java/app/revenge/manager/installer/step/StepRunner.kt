@@ -38,7 +38,8 @@ import java.io.File
  */
 @Stable
 class StepRunner(
-    private val discordVersion: DiscordVersion
+    private val discordVersion: DiscordVersion,
+    val unattended: Boolean = false
 ): KoinComponent {
 
     private val preferenceManager: PreferenceManager by inject()
@@ -129,7 +130,7 @@ class StepRunner(
         add(AddModStep(signedDir, lspatchedDir))
 
         // Installing
-        add(InstallStep(lspatchedDir))
+        add(InstallStep(lspatchedDir, unattended))
     }.toImmutableList()
 
     /**
@@ -174,7 +175,7 @@ class StepRunner(
 
             // Add delay for human psychology and
             // better group visibility in UI (the active group can change way too fast)
-            if (!preferenceManager.isDeveloper && step.durationMs < 1000) {
+            if (!unattended && !preferenceManager.isDeveloper && step.durationMs < 1000) {
                 delay(1000L - step.durationMs)
             }
         }

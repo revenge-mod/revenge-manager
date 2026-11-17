@@ -17,12 +17,15 @@ object ShizukuPermissions {
     private val _permissionsGranted = MutableSharedFlow<Boolean>(replay = 0)
     private lateinit var permissionResultListener: OnRequestPermissionResultListener
 
+    fun hasPermission(): Boolean =
+        Shizuku.pingBinder() && Shizuku.checkSelfPermission() == PackageManager.PERMISSION_GRANTED
+
     fun requestShizukuPermissions() {
         if (!Shizuku.pingBinder()) {
             GlobalScope.launch { _permissionsGranted.emit(false) }
             return
         }
-        if (Shizuku.checkSelfPermission() == PackageManager.PERMISSION_GRANTED) {
+        if (hasPermission()) {
             GlobalScope.launch { _permissionsGranted.emit(true) }
             return
         }

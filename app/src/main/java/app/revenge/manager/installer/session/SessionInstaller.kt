@@ -14,7 +14,7 @@ internal class SessionInstaller(private val context: Context) : Installer {
 
     private val packageManager: PackageManager = context.packageManager
 
-    override suspend fun installApks(silent: Boolean, vararg apks: File) {
+    override suspend fun installApks(silent: Boolean, unattended: Boolean, vararg apks: File) {
         val params = SessionParams(SessionParams.MODE_FULL_INSTALL).apply {
             if (Build.VERSION.SDK_INT >= 31) {
                 setInstallScenario(PackageManager.INSTALL_SCENARIO_FAST)
@@ -37,14 +37,19 @@ internal class SessionInstaller(private val context: Context) : Installer {
         }
 
         val callbackIntent = Intent(context, InstallService::class.java).apply {
-            action = "revenge.actions.ACTION_INSTALL"
+            action = if (unattended) InstallActions.INSTALL_UNATTENDED else InstallActions.INSTALL
         }
 
         @SuppressLint("UnspecifiedImmutableFlag")
         val contentIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            PendingIntent.getService(context, 0, callbackIntent, PendingIntent.FLAG_MUTABLE)
+            PendingIntent.getService(
+                context,
+                sessionId,
+                callbackIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE
+            )
         } else {
-            PendingIntent.getService(context, 0, callbackIntent, 0)
+            PendingIntent.getService(context, sessionId, callbackIntent, PendingIntent.FLAG_UPDATE_CURRENT)
         }
 
         session.commit(contentIntent.intentSender)

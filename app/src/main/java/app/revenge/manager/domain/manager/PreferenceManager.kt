@@ -44,6 +44,8 @@ class PreferenceManager(context: Context) :
 
     var updateDuration by enumPreference("update_duration", UpdateCheckerDuration.HOURLY)
 
+    var unattendedUpdates by booleanPreference("unattended_updates", false)
+
     var moduleLocation by filePreference("module_location", DEFAULT_MODULE_LOCATION)
 
     var installMethod by enumPreference("install_method", InstallMethod.DEFAULT)
