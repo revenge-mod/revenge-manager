@@ -5,7 +5,6 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import androidx.work.ExistingPeriodicWorkPolicy
-import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import app.revenge.manager.di.httpModule
 import app.revenge.manager.di.managerModule
@@ -39,10 +38,12 @@ class ManagerApplication : Application() {
         if (prefs.updateDuration != UpdateCheckerDuration.DISABLED) {
             val duration = prefs.updateDuration
             WorkManager.getInstance(applicationContext).enqueueUniquePeriodicWork(
-                "app.revenge.manager.UPDATE_CHECK",
+                UpdateWorker.WORK_NAME,
                 ExistingPeriodicWorkPolicy.KEEP,
-                PeriodicWorkRequestBuilder<UpdateWorker>(duration.time, duration.unit).build()
+                UpdateWorker.periodicRequest(duration)
             )
+        } else {
+            WorkManager.getInstance(applicationContext).cancelUniqueWork(UpdateWorker.WORK_NAME)
         }
     }
 

@@ -27,7 +27,8 @@ import java.io.File
  * @param lspatchedDir Where all the patched APKs are
  */
 class InstallStep(
-    private val lspatchedDir: File
+    private val lspatchedDir: File,
+    private val unattended: Boolean = false
 ): Step() {
 
     private val preferences: PreferenceManager by inject()
@@ -40,9 +41,21 @@ class InstallStep(
         runner.logger.i("Installing apks")
         val files = lspatchedDir.listFiles()
             ?.takeIf { it.isNotEmpty() }
+            ?.sortedBy { if (it.name.startsWith("base-")) 0 else 1 }
+            ?.toTypedArray()
             ?: throw Error("Missing APKs from LSPatch step; failure likely")
 
-        val installMethod = if (preferences.installMethod == InstallMethod.SHIZUKU && !ShizukuPermissions.waitShizukuPermissions()) {
+        val hasShizukuPermission = when {
+            preferences.installMethod != InstallMethod.SHIZUKU -> true
+            unattended -> ShizukuPermissions.hasPermission()
+            else -> ShizukuPermissions.waitShizukuPermissions()
+        }
+
+        if (unattended && preferences.installMethod == InstallMethod.SHIZUKU && !hasShizukuPermission) {
+            throw Error("Shizuku is unavailable or its permission has not been granted")
+        }
+
+        val installMethod = if (preferences.installMethod == InstallMethod.SHIZUKU && !hasShizukuPermission) {
             // Temporarily use DEFAULT if SHIZUKU permissions are not granted
             withContext(Dispatchers.Main) {
                 context.applicationContext.showToast(R.string.msg_shizuku_denied)
@@ -57,7 +70,7 @@ class InstallStep(
             InstallMethod.SHIZUKU -> ShizukuInstaller(context)
         }
 
-        installer.installApks(silent = !isMiui, *files)
+        installer.installApks(silent = unattended || !isMiui, unattended = unattended, *files)
     }
 
 }

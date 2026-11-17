@@ -89,6 +89,15 @@ class AdvancedSettings: Screen {
                 )
 
                 SettingsSwitch(
+                    label = stringResource(R.string.settings_unattended_updates),
+                    secondaryLabel = stringResource(R.string.settings_unattended_updates_description),
+                    pref = prefs.unattendedUpdates,
+                    onPrefChange = {
+                        prefs.unattendedUpdates = it
+                    }
+                )
+
+                SettingsSwitch(
                     label = stringResource(R.string.settings_auto_clear_cache),
                     secondaryLabel = stringResource(R.string.settings_auto_clear_cache_description),
                     pref = prefs.autoClearCache,

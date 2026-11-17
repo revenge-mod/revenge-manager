@@ -1,11 +1,13 @@
 package app.revenge.manager.installer.session
 
 import android.app.Service
+import android.app.PendingIntent
 import android.content.Intent
 import android.content.pm.PackageInstaller
 import android.os.IBinder
 import app.revenge.manager.R
 import app.revenge.manager.ui.activity.MainActivity
+import app.revenge.manager.updatechecker.UpdateNotifications
 import app.revenge.manager.utils.showToast
 
 class InstallService : Service() {
@@ -21,32 +23,59 @@ class InstallService : Service() {
     )
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
-        val isInstall = intent.action == "revenge.actions.ACTION_INSTALL"
+        val isUnattendedInstall = intent.action == InstallActions.INSTALL_UNATTENDED
+        val isInstall = intent.action == InstallActions.INSTALL || isUnattendedInstall
         when (val statusCode = intent.getIntExtra(PackageInstaller.EXTRA_STATUS, -999)) {
             PackageInstaller.STATUS_PENDING_USER_ACTION -> {
                 @Suppress("DEPRECATION") // No.
                 val confirmationIntent = intent.getParcelableExtra<Intent>(Intent.EXTRA_INTENT)!!
                     .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
-                startActivity(confirmationIntent)
+                if (isUnattendedInstall) {
+                    val notificationId = intent.getIntExtra(PackageInstaller.EXTRA_SESSION_ID, 0)
+                    val approvalIntent = PendingIntent.getActivity(
+                        this,
+                        notificationId,
+                        confirmationIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+                    )
+                    UpdateNotifications.showApprovalRequired(this, approvalIntent)
+                } else {
+                    startActivity(confirmationIntent)
+                }
             }
 
-            PackageInstaller.STATUS_SUCCESS -> if (isInstall) showToast(R.string.installer_success)
+            PackageInstaller.STATUS_SUCCESS -> if (isUnattendedInstall) {
+                UpdateNotifications.showInstalled(this)
+            } else if (isInstall) {
+                showToast(R.string.installer_success)
+            }
 
-            PackageInstaller.STATUS_FAILURE_ABORTED -> if (isInstall) showToast(R.string.installer_aborted)
+            PackageInstaller.STATUS_FAILURE_ABORTED -> if (isUnattendedInstall) {
+                UpdateNotifications.showInstallFailed(this, getString(R.string.installer_aborted))
+            } else if (isInstall) {
+                showToast(R.string.installer_aborted)
+            }
 
             else -> {
                 if (isInstall) {
-                    messages[statusCode]?.let(::showToast)
+                    val message = getString(messages[statusCode] ?: R.string.install_fail_generic)
+                    if (isUnattendedInstall) {
+                        UpdateNotifications.showInstallFailed(this, message)
+                    } else {
+                        showToast(messages[statusCode] ?: R.string.install_fail_generic)
+                    }
 
-                    // Send error messages back to the activity for debugging (to be received by InstallerScreen)
-                    startActivity(
-                        Intent("revenge.actions.ACTION_INSTALL_FINISHED").apply {
-                            setClass(this@InstallService, MainActivity::class.java)
-                            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                            putExtra("revenge.extras.EXTRA_MESSAGE", intent.getStringExtra(PackageInstaller.EXTRA_STATUS_MESSAGE))
-                        }
-                    )
+                    if (!isUnattendedInstall) {
+                        // Send error messages back to the activity for debugging (to be received by InstallerScreen)
+                        startActivity(
+                            Intent("revenge.actions.ACTION_INSTALL_FINISHED").apply {
+                                setClass(this@InstallService, MainActivity::class.java)
+                                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                putExtra("revenge.extras.EXTRA_MESSAGE", intent.getStringExtra(PackageInstaller.EXTRA_STATUS_MESSAGE))
+                            }
+                        )
+                    }
                 }
             }
         }
