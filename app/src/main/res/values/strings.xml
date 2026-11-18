@@ -137,6 +137,8 @@
     <string name="settings_mirror">Download mirror</string>
     <string name="settings_auto_clear_cache">Clear cache automatically</string>
     <string name="settings_auto_clear_cache_description">Clears cache when Discord gets an update</string>
+    <string name="settings_signing_key">Signing key</string>
+    <string name="settings_signing_key_description">Copy this key to transfer it to another Manager. Keep it private: anyone with the key can sign apps as you.</string>
 
     <string name="settings_developer">Developer only</string>
     <string name="settings_developer_description">These settings may break things if used improperly</string>
@@ -177,4 +179,18 @@
     <string name="install_method">Install method</string>
     <string name="default_installer">PackageManager (recommended)</string>
     <string name="shizuku_installer">Shizuku</string>
+    <string name="action_copy_signing_key">Copy signing key</string>
+    <string name="action_import_signing_key">Import signing key</string>
+    <string name="action_paste">Paste</string>
+    <string name="action_continue">Continue</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_replace_signing_key">Replace key</string>
+    <string name="title_import_signing_key">Import signing key</string>
+    <string name="label_signing_key">Signing key (Base64)</string>
+    <string name="msg_paste_signing_key">Paste the Base64 signing key copied from another Manager installation.</string>
+    <string name="msg_invalid_signing_key">This is not a valid Manager signing key. Paste the complete exported text.</string>
+    <string name="msg_replace_signing_key_warning">Replacing this key changes the signature used for future installs. Apps signed with the old key cannot be updated using the new key, and vice versa.</string>
+    <string name="msg_signing_key_copied">Signing key copied</string>
+    <string name="msg_signing_key_imported">Signing key imported</string>
+    <string name="msg_signing_key_import_failed">Could not import signing key</string>
 </resources>

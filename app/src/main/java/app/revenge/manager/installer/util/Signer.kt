@@ -1,6 +1,8 @@
 package app.revenge.manager.installer.util
 
 import android.content.Context
+import android.util.AtomicFile
+import android.util.Base64
 import com.android.apksig.ApkSigner
 import app.revenge.manager.BuildConfig
 import app.revenge.manager.utils.Constants
@@ -11,6 +13,7 @@ import org.bouncycastle.cert.jcajce.JcaX509CertificateConverter
 import org.bouncycastle.operator.jcajce.JcaContentSignerBuilder
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import java.io.ByteArrayInputStream
 import java.io.File
 import java.math.BigInteger
 import java.security.KeyPairGenerator
@@ -43,22 +46,71 @@ object Signer : KoinComponent {
         ks
     }
 
-    private val signerConfig: ApkSigner.SignerConfig by lazy {
-        val keyStore = KeyStore.getInstance(KeyStore.getDefaultType())
+    private var cachedSignerConfig: ApkSigner.SignerConfig? = null
 
-        this.keyStore.inputStream().use { stream ->
-            keyStore.load(stream, null)
+    @Synchronized
+    private fun signerConfig(): ApkSigner.SignerConfig {
+        cachedSignerConfig?.let { return it }
+
+        return createSignerConfig(readKeyStoreBytes()).also {
+            cachedSignerConfig = it
         }
+    }
 
-        val alias = keyStore.aliases().nextElement()
+    @Synchronized
+    fun exportSigningKey(): String = Base64.encodeToString(readKeyStoreBytes(), Base64.NO_WRAP)
+
+    @Synchronized
+    fun validateSigningKey(encodedKeyStore: String) {
+        createSignerConfig(decodeSigningKey(encodedKeyStore))
+    }
+
+    @Synchronized
+    fun importSigningKey(encodedKeyStore: String) {
+        val bytes = decodeSigningKey(encodedKeyStore)
+        val importedSignerConfig = createSignerConfig(bytes)
+
+        val atomicFile = AtomicFile(keyStore)
+        val output = atomicFile.startWrite()
+        try {
+            output.write(bytes)
+            atomicFile.finishWrite(output)
+            cachedSignerConfig = importedSignerConfig
+        } catch (t: Throwable) {
+            atomicFile.failWrite(output)
+            throw t
+        }
+    }
+
+    private fun decodeSigningKey(encodedKeyStore: String): ByteArray {
+        val bytes = try {
+            Base64.decode(encodedKeyStore.trim(), Base64.DEFAULT)
+        } catch (e: IllegalArgumentException) {
+            throw IllegalArgumentException("The signing key is not valid Base64", e)
+        }
+        require(bytes.isNotEmpty()) { "The signing key is empty" }
+        return bytes
+    }
+
+    private fun createSignerConfig(bytes: ByteArray): ApkSigner.SignerConfig {
+        val keyStore = loadKeyStore(bytes)
+        val aliases = keyStore.aliases()
+        check(aliases.hasMoreElements()) { "Signing key store has no entries" }
+        val alias = aliases.nextElement()
         val certificate = keyStore.getCertificate(alias) as X509Certificate
-
-        ApkSigner.SignerConfig.Builder(
+        return ApkSigner.SignerConfig.Builder(
             BuildConfig.MOD_NAME,
             keyStore.getKey(alias, password) as PrivateKey,
             listOf(certificate)
         ).build()
     }
+
+    private fun loadKeyStore(bytes: ByteArray): KeyStore =
+        KeyStore.getInstance(KeyStore.getDefaultType()).apply {
+            ByteArrayInputStream(bytes).use { load(it, null) }
+        }
+
+    private fun readKeyStoreBytes(): ByteArray = AtomicFile(keyStore).openRead().use { it.readBytes() }
 
     private fun newKeystore(out: File) {
         val key = createKey()
@@ -107,7 +159,7 @@ object Signer : KoinComponent {
     fun signApk(apkFile: File, output: File) {
         val outputApk = cacheDir.resolve(apkFile.name)
 
-        ApkSigner.Builder(listOf(signerConfig))
+        ApkSigner.Builder(listOf(signerConfig()))
             .setV1SigningEnabled(false) // TODO: enable so api <24 devices can work, however zip-alignment breaks
             .setV2SigningEnabled(true)
             .setV3SigningEnabled(true)
