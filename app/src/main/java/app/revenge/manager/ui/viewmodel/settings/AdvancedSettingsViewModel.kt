@@ -12,6 +12,7 @@ import app.revenge.manager.R
 import app.revenge.manager.domain.manager.InstallMethod
 import app.revenge.manager.domain.manager.PreferenceManager
 import app.revenge.manager.domain.manager.UpdateCheckerDuration
+import app.revenge.manager.installer.util.Signer
 import app.revenge.manager.installer.shizuku.ShizukuPermissions
 import app.revenge.manager.updatechecker.worker.UpdateWorker
 import app.revenge.manager.utils.showToast
@@ -29,6 +30,17 @@ class AdvancedSettingsViewModel(
         cacheDir.deleteRecursively()
         context.showToast(R.string.msg_cleared_cache)
     }
+
+    fun exportSigningKey(): String = Signer.exportSigningKey()
+
+    fun validateSigningKey(encodedKeyStore: String): Boolean =
+        runCatching { Signer.validateSigningKey(encodedKeyStore) }.isSuccess
+
+    fun importSigningKey(encodedKeyStore: String): Boolean = runCatching {
+        Signer.importSigningKey(encodedKeyStore)
+    }.onFailure {
+        context.showToast(R.string.msg_signing_key_import_failed)
+    }.isSuccess
 
     fun updateCheckerDuration(updateCheckerDuration: UpdateCheckerDuration) {
         val wm = WorkManager.getInstance(context)
